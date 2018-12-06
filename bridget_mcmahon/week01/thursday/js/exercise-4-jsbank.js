@@ -76,8 +76,8 @@ const bank = {
     if (typeof amount !== 'number' && amount > 0) {
       console.log("Please enter a number")
     } else {
-      for (let j = 0; j < bank.accounts.length; j++) {
-        const currentAccount = bank.accounts[j];
+      for (let i = 0; i < bank.accounts.length; i++) {
+        const currentAccount = bank.accounts[i];
         if (name === currentAccount.ownerName) {
           currentAccount.currentBalance -= amount;
           console.log(`${ currentAccount.ownerName}'s account now has $${ currentAccount.currentBalance.toFixed(2) }`)

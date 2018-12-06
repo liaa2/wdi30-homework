@@ -50,13 +50,13 @@ const validateCreditCard = function(cardNumber) {
 
   // check if all characters are numbers
   for (let i = cleanCardNo.length - 1; i >= 0; i--) {
-    const d = cleanCardNo.charCodeAt(i);
-    if (d < 48 || d > 57) {
+    const checkCharCode = cleanCardNo.charCodeAt(i);
+    if (checkCharCode < 48 || checkCharCode > 57) {
       returnError("Must only contain numbers");
     }
   }
 
-  // // check if final digit is even
+  // check if final digit is even
   if (cleanCardNo[15] % 2 !== 0) {
     returnError("Final digit must be even");;
   }

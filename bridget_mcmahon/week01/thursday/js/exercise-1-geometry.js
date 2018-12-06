@@ -54,7 +54,11 @@ const triangleA = {
 };
 
 const isEquilateral = function(triangle) {
-  if (triangle.sideA === triangle.sideB && triangle.sideB === triangle.sideC) {
+  const a = triangle.sideA;
+  const b = triangle.sideB;
+  const c = triangle.sideC;
+
+  if (a === b && b === c) {
     return "Triangle is equilateral";
   }
   return "Triangle is not equilateral";

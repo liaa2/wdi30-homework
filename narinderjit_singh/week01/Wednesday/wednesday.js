@@ -27,11 +27,11 @@ const checkReplace = function(chr,blank,str){
 
 
 
-const wordGuess = function(str){
+const wordGuess = function(){
+    let str=prompt("Enter the string to find = ");
     
-    let strLength = str.length;
     let blank = "";
-    
+    strLength=str.length;
     for(let i=0;i<strLength;i++){                   //setting blank spaces
         blank+="*";
     }
@@ -46,7 +46,7 @@ const wordGuess = function(str){
         }
         else{
             console.clear();
-            blank=checkReplace(ch,blank,str);       // Calling for check and replace
+            blank = checkReplace(ch,blank,str);       // Calling for check and replace
             counter++;
             console.log(blank);
         }
@@ -59,4 +59,4 @@ const wordGuess = function(str){
         alert("Sorry, try next time.");
 }
 
-wordGuess("inder");
+wordGuess();   

@@ -34,9 +34,9 @@ const rectangleA = {
   width: 4
 };
 
-console.log(isSquare(rectangleA));
-console.log(areaRectangle(rectangleA));
-console.log(perimeter(rectangleA));
+console.log(`Is it a square? ${ isSquare(rectangleA) }`);
+console.log(`What's the area of this rectangel? ${ areaRectangle(rectangleA) }`);
+console.log(`What's the perimter of this rectangle? ${ perimeter(rectangleA) }`);
 
 
 // Part 2, Triangle
@@ -51,10 +51,27 @@ console.log('---------- Part 2, Triangle -----');
  * - isObtuse - Returns whether the triangle is obtuse or not
  */
 
+ const isTriangle = function(obj) {
+   // Array of all sides
+   const sidesAll = [obj.sideA, obj.sideB, obj.sideC]
+   // Get max side length
+   const sideMax = Math.max.apply(null, sidesAll)
+   // Array of remaining sides
+   const sidesOther = sidesAll.filter(s => s!= sideMax);
+   // Is the max side length greater than the sum of the other two side lengths
+   if (sideMax > sidesOther.reduce((a, b) => a + b, 0)) {
+     return false
+   } else {
+     return true
+   }
+
+ }
+
 const isEquilateral = function(obj) {
   // Check if all sides are equal
   return (
-    obj.sideA === obj.sideB
+    isTriangle(obj)
+    && obj.sideA === obj.sideB
     && obj.sideA === obj.sideC
     && obj.sideB === obj.sideC
   );
@@ -63,15 +80,30 @@ const isEquilateral = function(obj) {
 const isIsosceles = function(obj) {
   // Check if all sides are equal
   return (
-    obj.sideA === obj.sideB
-    || obj.sideA === obj.sideC
-    || obj.sideB === obj.sideC
+    isTriangle(obj)
+    && (
+      obj.sideA === obj.sideB
+      || obj.sideA === obj.sideC
+      || obj.sideB === obj.sideC
+    )
   );
 }
 
+
+// Herons formula
 const areaTriangle = function(obj) {
- // area = sideA x sideB x sideC
- return obj.sideA*obj.sideB*obj.sideC;
+  // Check if triangle
+  if (isTriangle(obj)) {
+    // Semi-perimeter calculation
+    const S = (obj.sideA + obj.sideB + obj.sideC) / 2;
+    // Herron's formula
+    const area = Math.sqrt(S * (S - obj.sideA) * (S - obj.sideB) * (S - obj.sideC) );
+    // output
+    return area;
+  } else {
+    // else output
+    return 'not triangle'
+  }
 }
 
 const lawOfCosines = function(a ,b, c) {
@@ -82,7 +114,8 @@ const lawOfCosines = function(a ,b, c) {
 const isObtuse = function(obj) {
   // Test all angles of triangle to check if and greater than 90 degrees
   if (
-    lawOfCosines(obj.sideA, obj.sideB, obj.sideC) > Math.PI/2
+    isTriangle(obj)
+    || lawOfCosines(obj.sideA, obj.sideB, obj.sideC) > Math.PI/2
     || lawOfCosines(obj.sideB, obj.sideC, obj.sideA) > Math.PI/2
     || lawOfCosines(obj.sideC, obj.sideA, obj.sideB) > Math.PI/2
   ) {
@@ -98,10 +131,11 @@ const triangleA = {
   sideC: 15.2
 };
 
-console.log(isEquilateral(triangleA));
-console.log(isIsosceles(triangleA));
-console.log(areaTriangle(triangleA));
-console.log(isObtuse(triangleA));
+console.log(`Is triangle? ${ isTriangle(triangleA) }`);
+console.log(`Is this an equilateral triangle? ${ isEquilateral(triangleA) }`);
+console.log(`Is this an isosceles triangle? ${ isIsosceles(triangleA) }`);
+console.log(`What's the area of the triangle? ${ areaTriangle(triangleA) }`);
+console.log(`Is this an obtuse triangle? ${ isObtuse(triangleA) }`);
 
 
 // The Cash Register

@@ -28,28 +28,30 @@ const subwaySystem = {
 };
 
 const planTrip = function(startLine, startStation, endLine, endStation) {
-  // arrays for lines travelled
-  let lineOneStops = [];
-  let lineTwoStops = [];
+  const lineOneStops = [];
+  const lineTwoStops = [];
   // variables for positions on lines travelled
-  let startPosition = subwaySystem[startLine].indexOf(startStation);
-  let endPosition = subwaySystem[endLine].indexOf(endStation);
-  let lineOneEnd = subwaySystem[startLine].indexOf("Union Square");
-  let lineTwoStart = subwaySystem[endLine].indexOf("Union Square");
+  const startPosition = subwaySystem[startLine].indexOf(startStation);
+  const endPosition = subwaySystem[endLine].indexOf(endStation);
+  const lineOneEnd = subwaySystem[startLine].indexOf("Union Square");
+  const lineTwoStart = subwaySystem[endLine].indexOf("Union Square");
 
-  // if travelling on the same line ----------------------------------
+  const addStops = function (start, end) {
+    if (start < end) {
+      for (let i = start + 1; i <= end; i++) {
+        lineOneStops.push(subwaySystem[startLine][i]);
+      }
+    }
+    if (end < start) {
+      for (let i = start - 1; i >= end; i--) {
+        lineOneStops.push(subwaySystem[startLine][i]);
+      }
+    }
+  };
+
+  // if not travelling on different lines -----------------------------
   if ( startLine === endLine ) {
-    if (startPosition < endPosition) {
-      for (let i = startPosition + 1; i <= endPosition; i++) {
-        lineOneStops.push(subwaySystem[startLine][i]);
-      }
-    }
-
-    if (endPosition < startPosition) {
-      for (let i = startPosition - 1; i >= endPosition; i--) {
-        lineOneStops.push(subwaySystem[startLine][i]);
-      }
-    }
+    addStops(startPosition, endPosition);
 
     // list stops on first line
     let lineOneStopsStr = lineOneStops.join(', ');
@@ -57,34 +59,14 @@ const planTrip = function(startLine, startStation, endLine, endStation) {
 
   // if you need to change stations -----------------------------------
   } else {
-    if (startPosition < lineOneEnd) {
-      for (let i = startPosition + 1; i <= lineOneEnd; i++) {
-        lineOneStops.push(subwaySystem[startLine][i]);
-      }
-    }
-
-    if (startPosition > lineOneEnd) {
-      for (let i = startPosition - 1; i >= lineOneEnd; i--) {
-        lineOneStops.push(subwaySystem[startLine][i]);
-      }
-    }
+    addStops(startPosition, lineOneEnd);
 
     lineOneStopsStr = lineOneStops.join(', ');
     console.log(`You must travel through the following stops on the ${ startLine } line: ${ lineOneStopsStr }`);
     console.log(`Change stations at Union Square and get on line ${ endLine }`);
 
     // continue journey on new line
-    if (lineTwoStart < endPosition) {
-      for (let i = lineTwoStart + 1; i <= endPosition; i++) {
-        lineTwoStops.push(subwaySystem[endLine][i]);
-      }
-    }
-
-    if (lineTwoStart > endPosition) {
-      for (let i = lineTwoStart - 1; i >= endPosition; i--) {
-        lineTwoStops.push(subwaySystem[endLine][i]);
-      }
-    }
+    addStops(lineTwoStart, endPosition);
 
     lineTwoStopsStr = lineTwoStops.join(', ');
     console.log(`Your journey continues through the following stops: ${ lineTwoStopsStr }`);
@@ -92,10 +74,7 @@ const planTrip = function(startLine, startStation, endLine, endStation) {
 
   let totalStops = lineOneStops.length + lineTwoStops.length;
   console.log(`${ totalStops } stops in total.`)
-
-  // log number of stops in total
-
 };
 
 // next challenge: generate return messages if the stops are the same or
-// if you enter a stop/line that isn't valid
+// if you enter a stop/line that isn't valid, return error message

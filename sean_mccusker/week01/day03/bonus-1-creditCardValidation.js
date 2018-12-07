@@ -11,23 +11,23 @@ credit card number is valid.
 
 function validateCreditCard(creditCardNum) {
 
-    //Remove dashes from creditCardNum string
-    var ccNumberNoDashes = '';
+
+    var ccNumberNoDashes = '';   //Remove dashes from the string creditCardNum
     for (var i = 0; i < creditCardNum.length; i++) {
         if (creditCardNum[i] !== '-') {
             ccNumberNoDashes += creditCardNum[i];
         }
     }
 
-    // The credit card number must be 16 digits in length
-    if (ccNumberNoDashes.length !== 16) {
+
+    if (ccNumberNoDashes.length !== 16) { // The credit card number must be 16 digits EXACTLY
         return false;
     }
 
-    // All of the digits must be numbers
-    for (var i = 0; i < ccNumberNoDashes.length; i++) {
-        // store the current digit
-        var currentNumber = ccNumberNoDashes[i];
+
+    for (var i = 0; i < ccNumberNoDashes.length; i++) { // All of the digits must be integers
+
+        var currentNumber = ccNumberNoDashes[i]; // store the current digit
 
         // turn the digit from a string to an integer (if the digit is in fact a digit and not anther char)
         currentNumber = Number.parseInt(currentNumber);
@@ -64,7 +64,6 @@ function validateCreditCard(creditCardNum) {
     return true;
 };
 
-/**** tests *****/
 console.log(validateCreditCard('9999-9999-8888-0000'));
 console.log(`9999-9999-8888-0000 validates as ${ validateCreditCard('9999-9999-8888-0000') } because the credit card number has 16 digits, sum of credit card number is > 16 and the number ends in an even number.`);
 console.log(`\n`);

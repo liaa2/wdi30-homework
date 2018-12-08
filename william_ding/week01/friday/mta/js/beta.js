@@ -39,8 +39,34 @@ const outputTwo = function (startLine, finishLine, stops1, stops2) {
   console.log(`${ stops1.length + stops2.length} stops in total.`);
 }
 
+// inputCheck function
+const inputCheck = function (startLine, station1, finishLine, station2) {
+  const subwayLines = Object.keys(subway);
+  const line1 = subway[startLine];
+  const line2 = subway[finishLine];
+  if ( subwayLines.indexOf(startLine) === -1 ) {
+    console.log(`There is no line ${ startLine } in our subway system, please check your input.`);
+    return false;
+  } else if ( subwayLines.indexOf(finishLine) === -1 ) {
+    console.log(`There is no line ${ finishLine } in our subway system, please check your input.`);
+    return false;
+  } else if ( line1.indexOf(station1) === -1 ) {
+    console.log(`There is no ${ station1 } station in line ${ startLine }, please check your input.`);
+    return false;
+  } else if ( line2.indexOf(station2) === -1 ) {
+    console.log(`There is no ${ station2 } station in line ${ finishLine }, please check your input.`);
+    return false;
+  } else {
+    return true;
+  }
+}
+
 //--------------------------START OF MAIN FUNCTION--------------------------
 const planTrip = function (startLine, station1, finishLine, station2) {
+  // check for inputs
+  if ( !inputCheck(startLine, station1, finishLine, station2) ) {
+    return;
+  } else if ( inputCheck(startLine, station1, finishLine, station2) ) {
   // define variables needed
   let line1 = subway[startLine];
   let line2 = subway[finishLine];
@@ -115,4 +141,5 @@ const planTrip = function (startLine, station1, finishLine, station2) {
     const stops1 = rtoL(startLine, station1, "Union Square");
     return outputSignle(startLine, stops1);
   }
+}
 }

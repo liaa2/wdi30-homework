@@ -42,89 +42,70 @@ const subwaySystem = [
 ];
 
 
-
-function playTrip(startLine, startStop, endLine, endStop) {
-
-    let firstLineStops = [];
-    let lastLineStops = [];
-    let message;
+function moveOnOneLine(line, start, stop) {
+    let tripStops = [];
+    let totalStops;
 
     for (i = 0; i < subwaySystem.length; i++) {
-
-        if (subwaySystem[i].line === startLine && subwaySystem[i].stops.indexOf(startStop) >= 0) {  // without '>=' it doesn't work for index 0!
-
-            for (j = subwaySystem[i].stops.indexOf(startStop) + 1; j < subwaySystem[i].stops.length; j++) {
-                firstLineStops.push(subwaySystem[i].stops[j]);
-
-                if (subwaySystem[i].stops[j] === 'Union Square' && startLine !== endLine) {
-                    break;
+        if (subwaySystem[i].line === line) {
+            if (subwaySystem[i].stops.indexOf(start) < subwaySystem[i].stops.indexOf(stop)) {
+                for (j = subwaySystem[i].stops.indexOf(start) + 1; j <= subwaySystem[i].stops.indexOf(stop); j++) {
+                    tripStops.push(subwaySystem[i].stops[j]);
+                }
+            } 
+            
+            else {
+                for (j = subwaySystem[i].stops.indexOf(start) - 1; j >= subwaySystem[i].stops.indexOf(stop); j--) {
+                    tripStops.push(subwaySystem[i].stops[j]);
                 }
             }
-        }
-
-        if (firstLineStops.indexOf('Union Square') >= 0 && startLine !== endLine) {
-            if (subwaySystem[i].line === endLine) {
-                if (subwaySystem[i].stops.indexOf(endStop)) {
-
-                    if (subwaySystem[i].stops.indexOf(endStop) < subwaySystem[i].stops.indexOf('Union Square')) {
-
-                        for (k = subwaySystem[i].stops.indexOf('Union Square') - 1; k >= subwaySystem[i].stops.indexOf(endStop); k--) {
-                            lastLineStops.push(subwaySystem[i].stops[k]);
-                        }
-
-                    } else {
-
-                        for (k = subwaySystem[i].stops.indexOf('Union Square') + 1; k <= subwaySystem[i].stops.indexOf(endStop); k++) {
-                            lastLineStops.push(subwaySystem[i].stops[k]);
-                        }
-                    }
-
-                }
-            }
-
-
-            message = `. Change at Union Square. Your journey continues through the following stops: ${lastLineStops.join(', ')}. `;
-
-        } else {
-
-            message = '. ';
-
         }
     }
 
-    let totalStops = firstLineStops.length + lastLineStops.length;
+    totalStops = tripStops.length;
+    return { tripStops, totalStops };
+}
 
-    return `You must travel through the following stops on the ${startLine} line: ${firstLineStops.join(', ')}${message}${totalStops} stops in total.`;
+// console.log(moveOnOneLine('6', 'Grand Central', 'Astor Place'));
+// console.log(moveOnOneLine('6', 'Astor Place', 'Grand Central'));
+// console.log(moveOnOneLine('6', 'Union Square', '33rd'));
+// console.log(moveOnOneLine('6', '33rd', 'Union Square'));
+
+
+
+
+
+function playTrip(startLine, startStop, endLine, endStop) {
+
+    let message;
+
+    if (startLine === endLine) {
+        const moveOnOneLineResult = moveOnOneLine(startLine, startStop, endLine);
+        message = `You must travel through the following stops on the ${startLine} line: ${moveOnOneLineResult.tripStops.join(', ')}. ${moveOnOneLineResult.totalStops} stops in total.`;
+
+    } 
+
+    else {
+        const moveOnFirstLine = moveOnOneLine(startLine, startStop, 'Union Square');
+        const moveOnSecondLine = moveOnOneLine(endLine, 'Union Square', endStop);
+        const total = moveOnFirstLine.totalStops + moveOnSecondLine.totalStops;
+        message = `You must travel through the following stops on the ${startLine} line: ${moveOnFirstLine.tripStops.join(', ')}. Change at Union Square. Your journey continues through the following stops: ${moveOnSecondLine.tripStops.join(', ')}. ${total} stops in total.`;
+    }
+
+    return message;
 }
 
 
+// console.log(playTrip('L', '8th', 'N', 'Times Square'));
+// console.log(playTrip('L', '8th', 'N', '34th'));
+// console.log(playTrip('6', '33rd', 'L', '6th'));
 
-
-// ???? console.log(playTrip('L', '8th', 'N', 'Times Square'));
-//console.log(playTrip('6', '33rd', 'L', '6th'));
-
-//console.log(playTrip('N', '34th', '6', 'Astor Place'));
+// console.log(playTrip('N', '34th', '6', 'Astor Place'));
 //console.log(playTrip('N', 'Times Square', '6', '33rd'));
 //console.log(playTrip('L', '6th', 'L', '1st'));
 //console.log(playTrip('N', 'Times Square', 'N', '8th'));
 //console.log(playTrip('L', 'Union Square', 'L', '1rd'));
-//console.log(playTrip('6', '33rd', '6', 'Astor Place'));
+// console.log(playTrip('6', '33rd', '6', 'Astor Place'));
+//console.log(playTrip('6', '33rd', '6', 'Union Square'));
+
 //console.log(playTrip('L', '8th', '6', 'Astor Place'));
-
-
-
-
-// for (m = subwaySystem.length; m > 0; m--) {
-//     if (subwaySystem[m].line === b) {
-
-//         if (subwaySystem[m].stops.indexOf(d) < subwaySystem[m].stops.indexOf('Union Square')) {
-
-//             for (n = subwaySystem[m].stops.indexOf('Union Square') - 1; n >= subwaySystem[m].stops.indexOf(d); n--) {
-//                 lastLineStops.push(subwaySystem[m].stops[n]);
-//             }
-
-//         } else {
-
-//             for (n = subwaySystem[m].stops.indexOf('Union Square') + 1; n <= subwaySystem[m].stops.indexOf(d); n++) {
-//                 lastLineStops.push(subwaySystem[m].stops[n]);
-//             }

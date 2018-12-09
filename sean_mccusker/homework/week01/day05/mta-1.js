@@ -57,24 +57,91 @@ Make sure the stops that are the same for different lines have different names
 
 // console.log(`Is there anybody out there`);
 
-nLine = ['Times Square', '34th', '28th', '23rd', 'Union Square', '8th'];
-lLine = ['8th', '6th', 'Union Square', '3rd', '1st'];
-sixLine = ['Grand Central', '33rd', '28th', '23rd', 'Union Square', 'Astor Place'];
+// lineN = ['Times Square', '34th', '28th', '23rd', 'Union Square', '8th'];
+// lineL = ['8th', '6th', 'Union Square', '3rd', '1st'];
+// line6 = ['Grand Central', '33rd', '28th', '23rd', 'Union Square', 'Astor Place'];
 
 
 
-console.log(nLine[0]);
+const mta = {
+  'N': ['Times Square', '34th', '28th', '23rd', 'Union Square', '8th'],
+  'L': ['8th', '6th', 'Union Square', '3rd', '1st'],
+  '6': ['Grand Central', '33rd', '28th', '23rd', 'Union Square', 'Astor Place']
+}
 
 
+const planTrip = function( lineOne, stationStart, lineTwo, stationEnd ) {
 
-//console.log(nLine[0]);
+  // Below validates if the lines exist in the mta system.
+  let validLine = [];
+  for ( value in mta ){
+    validLine.push( value );   // Returns an array of lines
+  };
+  if (validLine.indexOf( lineOne ) === -1 ){
+    return `Fuhgettaboutit, not a valid starting point.`;
+  };
+  if (validLine.indexOf( lineTwo ) === -1 ){
+    return `Fuhgettaboutit, not a valid termination point.`;
+  };
 
+  // Code below checks to see if rider is on the same line for their origin and desired destination.
+  if ( lineOne === lineTwo && stationStart === stationEnd ) {
+    return `Hey momo, you are where you want to be!`
+  }
 
+// For our traveller that does not need to transfer. Origin and destination is on the same line.
+  if (lineOne === lineTwo){
+    let getLine = mta[ lineOne ];   // Returns an array of a given line.
+    let startIndex = mta[ lineOne ].indexOf( stationStart );
+    if ( startIndex === -1 ) {
+      return 'Fuhgettaboutit, not a valid starting point.';
+    };
+    let endIndex = mta[ lineOne ].indexOf( stationEnd );
+    if ( endIndex === -1 ) {
+      return 'Fuhgettaboutit, not a valid termination point.';
+    };
+    let stops = startIndex - endIndex;
+    let stopNames = [];
+    if ( stops < 0 ){  // If trip is moving forward.
+      stops = stops * ( -1 );
+      stopNames = getLine.slice( startIndex + 1, endIndex + 1 ).join(', ');
+    }else{  // The end stops is a negative number.
+      stopNames = getLine.slice( endIndex, startIndex ).reverse().join(', ');
+    }   // The end stops is a positive number.
+    return `Your travels on the ${ lineOne } line, from ${ stationStart } to ${ stationEnd } is through the following stops: ${ stopNames }.  There are ${ stops } stops.`;
 
+  }else{
+    // For the portion of the trip that needs to make a transfer at Union Square
+    let getLineOne = mta[ lineOne ];  // This returns an array of stops that our traveller encounters on lineOne
+    let startIndex = mta[ lineOne ].indexOf( stationStart );
+    if (startIndex === -1) {
+      return 'Fuhgettaboutit, not a valid starting point.';
+    };
+    let stopsToUnion = startIndex - mta[ lineOne ].indexOf( 'Union Square' );
+    let stopsToUnionArray = [];
+    if ( stopsToUnion < 0 ){  // These are negative stops going forward.
+      stopsToUnion = stopsToUnion * ( -1) ;
+      stopsToUnionArray = getLineOne.slice( startIndex + 1, mta[ lineOne ].indexOf( 'Union Square' ) +1).join(', ');
+    }else{    // Positive stops going in reverse.
+      stopsToUnionArray = getLineOne.slice( mta[lineOne].indexOf( 'Union Square' ), startIndex).reverse().join(', ');
+    }
+    // This is the portion of the trip after the ttransfer is made at Union Square
+    let getLineTwo = mta[ lineTwo ];  // This is the array of stops our traveller encunters on lineTwo
+    let endIndex = mta[ lineTwo ].indexOf( stationEnd );
+    if ( endIndex === -1 ) {
+      return 'Fuhgettaboutit, not a valid termination point.';
+    };
+    let stopsFromUnion = mta[ lineTwo ].indexOf( 'Union Square' ) - endIndex;
+    let stopsFromUnionArray = [];
+    if ( stopsFromUnion < 0 ){  // This is for negative stops, going forward
+      stopsFromUnion = stopsFromUnion * ( -1 );
+      stopsFromUnionArray = getLineTwo.slice(mta[ lineTwo ].indexOf( 'Union Square' ) +1, endIndex +1).join(', ');
+    }else{    // This is for positive stops, going backwards
+      stopsFromUnionArray = getLineTwo.slice( endIndex, mta[ lineTwo ].indexOf( 'Union Square' )).reverse().join(', ');
+    }
 
+    return `You must travel through the following stops on the ${ lineOne } line: ${ stopsToUnionArray }. Change at Union Square. Your journey continues through the following stops: ${ stopsFromUnionArray }. There are ${ stopsToUnion + stopsFromUnion } stops in total.`;
+  }
+};
 
-
-
-//console.log(nLine[0]);
-//console.log(lLine[3]);
-//console.log(sixLine[5]);
+console.log(planTrip('N', 'Times Square', '6', '33rd'));

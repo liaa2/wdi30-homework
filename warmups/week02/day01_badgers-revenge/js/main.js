@@ -10,11 +10,37 @@
 // * Pick a random student to deliver the solution to Friday's warmup.
 // * If no one has clapped enough that week, the program should indicate that Badger has to do his own damned warmup.
 
-// const claps = [
-//   ['Alex', 3],
-//   ['Fred', 1]
-// ]
-//
-// const currentStudent = claps[i];
-// const name = currentStudent[0];
-// const clap = currentStudent[1];
+const revengeOfBadger = {
+  students: {
+    "Alex": 1,
+    "Bob": 2,
+    "Charlie": 3,
+    "Daisy": 4,
+    "Ella": 5
+  },
+
+  shortList: [],
+
+  getStudentList: function(){
+    //reset shortList to empty array
+    this.shortList = [];
+    for(let key in this.students){
+      if (this.students[key] > 2) {
+        this.shortList.push(key);
+      }
+    } //for
+    console.log(this.shortList); //["Charlie", "Daisy", "Ella"]
+    return this.shortList.length; //3
+  },
+
+  draw: function(){
+    let winner = "Badger";
+    let numberOfCandidates = this.getStudentList(); // 3
+    if (numberOfCandidates > 0) {
+      let randy = Math.floor(Math.random() * numberOfCandidates);
+      winner = this.shortList[randy];
+    } //if
+
+    return `winner is ${winner}.`;
+  }
+}

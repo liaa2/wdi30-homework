@@ -28,7 +28,8 @@ body {
 }
 
 a {
-	color: blue;
+   color:#26689f;
+   text-decoration:none;
 }
 
 a:hover {
@@ -41,7 +42,7 @@ a:hover {
 }
 
 .date {
-	color: blue;
+	color:#26689f;
 	padding-bottom: 0;
 
 }

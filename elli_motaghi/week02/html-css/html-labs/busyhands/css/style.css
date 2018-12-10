@@ -1,0 +1,37 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background: white;
+    font-family: Arial, sans-serif;
+	color: #292928;
+	font-size: 14px;
+	line-height: 1.2;
+	
+}
+
+#container {
+   width: 950px;
+   margin: 0 auto;
+}
+
+#header {
+    padding: 20px 0px;
+}
+    #logo {
+        background: url(../images/logo.png) no-repeat;
+        width: 320px;
+		height: 76px;
+    }
+      
+    #logo h1 {
+        text-indent: -99999em;	/* hides the H1 tag from the page, while semantically keeping it present in your HTML */
+    }
+
+p { 
+   margin: 0px 0px 15px 0px;
+} /* there's no explicit rule, but putting about 15px margin only to the bottom of your p is generally a good rule of thumb */
+
+p {
+    font-size: 110%;
+    line-height: 1.3;
+}    

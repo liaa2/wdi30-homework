@@ -1,0 +1,196 @@
+/* * {
+  border: 1px solid yellow;
+} */
+
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono');
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+nav {
+  height: 60px;
+  text-align: right;
+  background-color: #0C1821;
+  padding-right: 12em;
+  padding-bottom: 0;
+}
+
+nav a {
+  color: white;
+  line-height: 60px;
+  margin: 0.8em;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+#hero {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  background-color: #D64550;
+  height: 90px;
+  line-height: 90px;
+  margin-top: 0;
+  color: white;
+  margin-bottom: 0;
+}
+
+h1, h2, h3 {
+  font-family: 'Roboto Mono', monospace;
+}
+
+h2 {
+  text-align: center;
+}
+
+h3 {
+  height: 50px;
+  padding-left: 1em;
+  line-height: 50px;
+}
+
+article {
+  text-align: left;
+}
+
+article h3 {
+  color: white;
+}
+
+.container img {
+  display: block;
+  margin: 0 auto;
+  height: 50%;
+  width: 50%;
+}
+
+.column {
+  display: inline-block;
+  height: 200px;
+  width: 287px;
+  line-height: 200px;
+  margin: 5px;
+}
+
+.column h3 {
+  padding: 0;
+  margin: 0;
+  color: black;
+  text-align: center;
+}
+
+.column a {
+  text-decoration: none;
+  color: black;
+}
+
+.column a:hover {
+  text-decoration: underline;
+}
+
+.biography {
+  background-image: url(../images/blank-paper.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.biography:hover {
+  background-image: none;
+  background-color: lightgrey;
+}
+
+.trivia {
+  background-image: url(../images/bulb.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.trivia:hover {
+  background-image: none;
+  background-color: lightgrey;
+}
+
+.hometown {
+  background-image: url(../images/map.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.hometown:hover {
+  background-image: none;
+  background-color: lightgrey;
+}
+
+.fa-bars {
+  color: white;
+}
+
+.early-life h3 {
+  background-image: url(../images/milwaukee01.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 60px;
+  line-height: 60px;
+}
+
+.education h3 {
+  background-image: url(../images/university01.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 60px;
+  line-height: 60px;
+}
+
+.publications h3 {
+  background-image: url(../images/books01.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 60px;
+  line-height: 60px;
+}
+
+.basics h3 {
+  background-image: url(../images/code.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 60px;
+  line-height: 60px;
+}
+
+.map h3 {
+  color: black;
+  padding-left: 0;
+  line-height: 50px;
+}
+
+footer {
+  bottom: 0;
+  width: auto;
+  background-color: #D64550;
+  color: white;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}

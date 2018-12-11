@@ -35,10 +35,14 @@ let toType = function(arr){
     return typeof(arr);
 };
 const isStringPresent = function(cardNumber){
-    return cardNumber.map(toType).includes('string');
+    let result = '';
+    result = cardNumber.map(toType).includes('string');
+    return result;
  };
 const isCardNumberSame = function(cardNumber){
-  return cardNumber.every( (val, i, arr) => val === arr[0] );
+  let result = '';
+  result = cardNumber.every( (val, i, arr) => val === arr[0] );
+  return result;
 };
 const generateArray = function(cardNumber){
   let ccnumber = (cardNumber.replace(new RegExp("-", "g"),'')).split('');
@@ -62,7 +66,7 @@ const validateCreditCard = function(cardNumber){
     result = 'Last Digit is unacceptable';
     return result;
   }
-  if(isStringPresent){
+  if(isStringPresent(cardNumber)){
     result = 'Only Numbers allowed.';
     return result;
   }
@@ -82,7 +86,7 @@ const processCardnumber = function(cardNumber){
   return (result === true) ? `Valid Card# ${cardNumber}.` : `InValid Card# ${cardNumber}. ${result}`;
 };
 
-  console.log(`${processCardnumber('1111-0010-0011-1101')}`);
+  console.log(`${processCardnumber('8888-8888-8888-8888')}`);
 /*
 a923-3211-9c01-1112 invalid characters
 4444-4444-4444-4444 only one type of number

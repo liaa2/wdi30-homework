@@ -59,11 +59,10 @@ const cloudsMove = function () {
     }
 };
 
-const cloudTimer = window.setInterval(cloudsMove, 60);
+const cloudTimer = window.setInterval(cloudsMove, 30);
 
-// dog Walk /////////////////////////////////////////////////////
+// happy dog /////////////////////////////////////////////////////
 
-//from right to left
 const happyDogImage = document.getElementsByTagName('img')[5];
 happyDogImage.style.position = 'absolute';
 happyDogImage.style.left = '0px';
@@ -104,4 +103,58 @@ happyDogTimer = window.setInterval(dogWalk, 3);
 
 
 
+// crazy dog /////////////////////////////////////////////////////
 
+const crazyDogImage = document.getElementsByTagName('img')[7];
+crazyDogImage.style.position = 'absolute';
+crazyDogImage.style.right = '0px';
+
+
+
+// right to left
+const crazyDogWalk = function () {
+    const oldPosition = parseInt(crazyDogImage.style.right);
+    const newPosition = oldPosition + 1;
+    crazyDogImage.style.right = newPosition + 'px';
+
+    if (crazyDogImage.style.right === '630px') {
+        window.clearInterval(crazyDogTimer);
+        crazyDogImage.style.opacity = 0;
+
+        const dancingDogImage = document.getElementsByTagName('img')[9];
+        dancingDogImage.src = '../images/dog02.gif';
+        dancingDogImage.style.position = 'absolute';
+        dancingDogImage.style.right = '630px';
+
+        const stopDancing = function () {
+            dancingDogImage.style.opacity = 0;
+        }
+
+        const stopTimer = window.setTimeout(stopDancing, 3000);
+    }
+
+};
+
+const crazyDogTimer = window.setInterval(crazyDogWalk, 3);
+
+
+// left to right
+
+const crazyDogImage2 = document.getElementsByTagName('img')[8];
+crazyDogImage2.src = '../images/dog03.gif';
+crazyDogImage2.style.position = 'absolute';
+crazyDogImage2.style.left = '0px';
+
+const crazyDogWalk2 = function () {
+    const oldPosition = parseInt(crazyDogImage2.style.left);
+    const newPosition = oldPosition + 1;
+    crazyDogImage2.style.left = newPosition + 'px';
+
+    if (crazyDogImage2.style.left === '630px') {
+        window.clearInterval(crazyDogTimer2);
+        crazyDogImage2.style.opacity = 0;
+
+    }
+};
+
+crazyDogTimer2 = window.setInterval(crazyDogWalk2, 3);

@@ -62,3 +62,26 @@ body {
     height: 100px;
     top: 500px;
 }
+
+#crazy, #left-right{
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    top: 600px;
+}
+
+#dancing-dog {
+    display: inline-block;
+    top: 600px;
+    width: 150px;
+    height: 150px;
+}
+
+#boom {
+    display: inline-block;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 500px;
+    right: 740;
+}

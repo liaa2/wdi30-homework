@@ -17,21 +17,55 @@ const changeCat = function () {
   }
 }
 
+/* -----------------------SHOW HIDDEN CATS----------------------------- */
+const showHidden = function () {
+  const hiddenCats = document.querySelectorAll(".hidden-cat");
+  for (let i = 0; i < hiddenCats.length; i++) {
+    hiddenCats[i].style.display = "block";
+  }
+}
+
+const hideCats = function () {
+  const hiddenCats = document.querySelectorAll(".hidden-cat");
+  for (let i = 0; i < hiddenCats.length; i++) {
+    hiddenCats[i].style.display = "none";
+  }
+}
+
+/* -----------------------UNMUTE VIDEO----------------------------- */
+
+function toggleMute() {
+
+  const video = document.getElementById("myVideo");
+
+  if(video.muted){
+    video.muted = false;
+  } else {
+    video.muted = true;
+  }
+
+}
+
+
 /* -----------------------PAUSE FUNCTIONS----------------------------- */
 const pause = function () {
   counter++;
-  if (counter > 2) {
+  if (counter > 6) {
     window.clearInterval(timer);
     changeCat();
+    hideCats();
+    toggleMute();
     timer = window.setInterval(leftToRight2, 5);
   }
 }
 
 const pause2 = function () {
   counter++;
-  if (counter > 2) {
+  if (counter > 6) {
     window.clearInterval(timer);
     changeCat();
+    hideCats();
+    toggleMute();
     timer = window.setInterval(rightToLeft2, 5);
   }
 }
@@ -39,9 +73,11 @@ const pause2 = function () {
 /* ----------------------LEFT TO MIDDLE------------------------------ */
 const leftToRight = function () {
     theCat.style.left = parseInt(theCat.style.left) + 1 + "px";
-    if ( parseInt(theCat.style.left) === window.innerWidth / 2 - 125) {
+    if ( parseInt(theCat.style.left) === window.innerWidth / 2 - 200) {
       window.clearInterval(timer);
       changeCat();
+      showHidden();
+      toggleMute();
       counter = 0;
       timer = window.setInterval(pause, 1000);
     }
@@ -50,7 +86,7 @@ const leftToRight = function () {
 /* ----------------------CONTINUE AFTER PAUSE------------------------------ */
 const leftToRight2 = function () {
     theCat.style.left = parseInt(theCat.style.left) + 1 + "px";
-    if ( parseInt(theCat.style.left) >= window.innerWidth - 250 ) {
+    if ( parseInt(theCat.style.left) >= window.innerWidth - 400 ) {
       window.clearInterval(timer);
       timer = window.setInterval(rightToLeft, 5);
     }
@@ -60,9 +96,11 @@ const leftToRight2 = function () {
 const rightToLeft = function () {
     theCat.style.transform = "scaleX(-1)";
     theCat.style.left = parseInt(theCat.style.left) - 1 + "px";
-    if ( parseInt(theCat.style.left) === window.innerWidth / 2 -125 ) {
+    if ( parseInt(theCat.style.left) === window.innerWidth / 2 - 200 ) {
       window.clearInterval(timer);
       changeCat();
+      showHidden();
+      toggleMute();
       counter = 0;
       timer = window.setInterval(pause2, 1000);
     }

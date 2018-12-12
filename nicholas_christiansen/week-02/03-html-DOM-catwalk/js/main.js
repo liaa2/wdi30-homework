@@ -21,7 +21,7 @@
 
 const cat = {
   x: 0,
-  y:0,
+  y: 0,
   time: 0,
   surf: function () {
 
@@ -60,7 +60,7 @@ const cat = {
 }
 
 // Setup background GIF
-document.body.style.backgroundImage = "url(https://i.imgur.com/pDKw5Ds.gif)"
+//document.body.style.backgroundImage = "url(https://i.imgur.com/pDKw5Ds.gif)"
 
 // get image
 const img = document.getElementsByTagName('img')[0];

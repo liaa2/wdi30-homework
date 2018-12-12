@@ -60,7 +60,6 @@ h2 {
 
 h3 {
   height: 50px;
-  padding-left: 1em;
   line-height: 50px;
 }
 
@@ -73,70 +72,12 @@ article h3 {
 }
 
 .container img {
+  height: auto;
+  width: auto;
   display: block;
   margin: 0 auto;
-  height: 50%;
-  width: 50%;
-}
-
-.column {
-  display: inline-block;
-  height: 200px;
-  width: 287px;
-  line-height: 200px;
-  margin: 5px;
-}
-
-.column h3 {
-  padding: 0;
-  margin: 0;
-  color: black;
-  text-align: center;
-}
-
-.column a {
-  text-decoration: none;
-  color: black;
-}
-
-.column a:hover {
-  text-decoration: underline;
-}
-
-.biography {
-  background-image: url(../images/blank-paper.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.biography:hover {
-  background-image: none;
-  background-color: lightgrey;
-}
-
-.trivia {
-  background-image: url(../images/bulb.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.trivia:hover {
-  background-image: none;
-  background-color: lightgrey;
-}
-
-.hometown {
-  background-image: url(../images/map.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.hometown:hover {
-  background-image: none;
-  background-color: lightgrey;
+  max-width: 620px;
+  padding-top: 2em;
 }
 
 .fa-bars {
@@ -150,6 +91,7 @@ article h3 {
   background-position: center;
   height: 60px;
   line-height: 60px;
+  padding-left: 30px;
 }
 
 .education h3 {
@@ -159,15 +101,7 @@ article h3 {
   background-position: center;
   height: 60px;
   line-height: 60px;
-}
-
-.publications h3 {
-  background-image: url(../images/books01.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 60px;
-  line-height: 60px;
+  padding-left: 30px;
 }
 
 .basics h3 {
@@ -177,6 +111,7 @@ article h3 {
   background-position: center;
   height: 60px;
   line-height: 60px;
+  padding-left: 30px;
 }
 
 .map h3 {
@@ -193,4 +128,16 @@ footer {
   height: 40px;
   line-height: 40px;
   text-align: center;
+}
+
+.fas {
+  padding-right: 0.5em;
+}
+
+.publications img {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  max-height: 200px;
+  margin: 1em;
 }

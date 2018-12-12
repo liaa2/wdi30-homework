@@ -68,6 +68,9 @@ const happyDogImage = document.getElementsByTagName('img')[5];
 happyDogImage.style.position = 'absolute';
 happyDogImage.style.left = '0px';
 
+
+let happyDogTimer;
+
 const dogWalk = function () {
     const oldPosition = parseInt(happyDogImage.style.left);
     const newPosition = oldPosition + 1;
@@ -87,14 +90,17 @@ const dogWalk = function () {
             reverseDogImage.style.right = newPosition + 'px';
             if (reverseDogImage.style.right === '1450px') {
                 window.clearInterval(reverseDogTimer);
+
+                happyDogImage.style.left = '0px';
+                happyDogTimer = window.setInterval(dogWalk, 3);
             }
         };
 
-        const reverseDogTimer = window.setInterval(dogWalkBack, 10);
+        const reverseDogTimer = window.setInterval(dogWalkBack, 3);
     }
 };
 
-const happyDogTimer = window.setInterval(dogWalk, 10);
+happyDogTimer = window.setInterval(dogWalk, 3);
 
 
 

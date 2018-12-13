@@ -9,8 +9,8 @@ Bonus: respond to key presses so that the user doesn't have to click the button.
 // square number ///////////////////////////////////
 
 $('#square-button').on('click', function () {
-  const input = $('#square-input').val();
-  const result = input * input
+  const $input = $('#square-input').val();
+  const result = $input * $input
   $('#solution').append(`<p>${ result }</p>`);
 });
 

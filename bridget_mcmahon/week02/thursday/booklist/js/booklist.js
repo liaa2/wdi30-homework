@@ -20,5 +20,10 @@ var books = [
 $('h1').after('<ul>');
 
 $.each(books, function(key, value) {
-  $('ul').append(`<li><strong>${ value.title }</strong> by ${ value.author }`);
+  const $info = $('<li></li>').appendTo('ul');
+  $info.html(`<strong>${ value.title }</strong> by ${ value.author }`);
+
+  if (value.alreadyRead === true) {
+    $info.addClass("read");
+  }
 });

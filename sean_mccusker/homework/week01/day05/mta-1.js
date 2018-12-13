@@ -84,7 +84,8 @@ const planTrip = function( lineOne, stationStart, lineTwo, stationEnd ) {
     return `Fuhgettaboutit, not a valid termination point.`;
   };
 
-  // Code below checks to see if rider is on the same line for their origin and desired destination.
+  /* Code below checks to see if rider is on the same line for their origin and
+  desired destination. As well as, if they are already at their destination. */
   if ( lineOne === lineTwo && stationStart === stationEnd ) {
     return `Hey momo, you are where you want to be!`
   }
@@ -94,49 +95,49 @@ const planTrip = function( lineOne, stationStart, lineTwo, stationEnd ) {
     let getLine = mta[ lineOne ];   // Returns an array of a given line.
     let startIndex = mta[ lineOne ].indexOf( stationStart );
     if ( startIndex === -1 ) {
-      return 'Fuhgettaboutit, not a valid starting point.';
+      return `Fuhgettaboutit, not a valid starting point.`;
     };
     let endIndex = mta[ lineOne ].indexOf( stationEnd );
     if ( endIndex === -1 ) {
-      return 'Fuhgettaboutit, not a valid termination point.';
+      return `Fuhgettaboutit, not a valid termination point.`;
     };
     let stops = startIndex - endIndex;
     let stopNames = [];
     if ( stops < 0 ){  // If trip is moving forward.
       stops = stops * ( -1 );
       stopNames = getLine.slice( startIndex + 1, endIndex + 1 ).join(', ');
-    }else{  // The end stops is a negative number.
+    } else {  // The end stops is a negative number.
       stopNames = getLine.slice( endIndex, startIndex ).reverse().join(', ');
     }   // The end stops is a positive number.
     return `Your travels on the ${ lineOne } line, from ${ stationStart } to ${ stationEnd } is through the following stops: ${ stopNames }.  There are ${ stops } stops.`;
 
-  }else{
+  } else {
     // For the portion of the trip that needs to make a transfer at Union Square
     let getLineOne = mta[ lineOne ];  // This returns an array of stops that our traveller encounters on lineOne
     let startIndex = mta[ lineOne ].indexOf( stationStart );
     if (startIndex === -1) {
-      return 'Fuhgettaboutit, not a valid starting point.';
+      return `Fuhgettaboutit, not a valid starting point.`;
     };
     let stopsToUnion = startIndex - mta[ lineOne ].indexOf( 'Union Square' );
     let stopsToUnionArray = [];
     if ( stopsToUnion < 0 ){  // These are negative stops going forward.
       stopsToUnion = stopsToUnion * ( -1) ;
       stopsToUnionArray = getLineOne.slice( startIndex + 1, mta[ lineOne ].indexOf( 'Union Square' ) +1).join(', ');
-    }else{    // Positive stops going in reverse.
+    } else {    // Positive stops going in reverse.
       stopsToUnionArray = getLineOne.slice( mta[lineOne].indexOf( 'Union Square' ), startIndex).reverse().join(', ');
     }
     // This is the portion of the trip after the ttransfer is made at Union Square
     let getLineTwo = mta[ lineTwo ];  // This is the array of stops our traveller encunters on lineTwo
     let endIndex = mta[ lineTwo ].indexOf( stationEnd );
     if ( endIndex === -1 ) {
-      return 'Fuhgettaboutit, not a valid termination point.';
+      return `Fuhgettaboutit, not a valid termination point.`;
     };
     let stopsFromUnion = mta[ lineTwo ].indexOf( 'Union Square' ) - endIndex;
     let stopsFromUnionArray = [];
     if ( stopsFromUnion < 0 ){  // This is for negative stops, going forward
       stopsFromUnion = stopsFromUnion * ( -1 );
       stopsFromUnionArray = getLineTwo.slice(mta[ lineTwo ].indexOf( 'Union Square' ) +1, endIndex +1).join(', ');
-    }else{    // This is for positive stops, going backwards
+    } else {    // This is for positive stops, going backwards
       stopsFromUnionArray = getLineTwo.slice( endIndex, mta[ lineTwo ].indexOf( 'Union Square' )).reverse().join(', ');
     }
 
@@ -145,3 +146,7 @@ const planTrip = function( lineOne, stationStart, lineTwo, stationEnd ) {
 };
 
 console.log(planTrip('N', 'Times Square', '6', '33rd'));
+console.log(planTrip('L', '3rd', '6', 'Central Perk'));
+console.log(planTrip('N', 'Times Square', 'N', 'Times Square'));
+console.log(planTrip('O', 'Times Square', 'N', 'Times Square'));
+console.log(planTrip('6', 'Grand Central', 'L', '1st'));

@@ -8,6 +8,7 @@ In the makeMadLib function, retrieve the current values of the form input elemen
 
 */
 
+$('h1').funText(400, 'candy');
 
 const makeMadLib = function() {
   const noun = $('#noun').val();

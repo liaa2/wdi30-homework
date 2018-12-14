@@ -35,7 +35,7 @@ const checkForAnagram = function(word, candidateWords){
   // console.log(word);
 
   //shorter way
-  word = customSort(word);
+  let sortedWord = customSort(word);
   // console.log(word);
 
   for (var i = 0; i < candidateWords.length; i++) {
@@ -43,7 +43,7 @@ const checkForAnagram = function(word, candidateWords){
     let candidate = customSort(candidateWords[i]);
     // console.log(candidate);
 
-    if (word === candidate) {
+    if (sortedWord === candidate) {
       anagrams.push(candidateWords[i])
     }
   }//for
@@ -85,7 +85,7 @@ const anagramChecker = {
 
     //shorter way
     // store into a variable the word that was returned by the customSort() method
-    word = this.customSort(word);
+    let sortedWord = this.customSort(word);
     // console.log(word);
 
     for (var i = 0; i < candidateWords.length; i++) {
@@ -93,7 +93,7 @@ const anagramChecker = {
       let candidate = this.customSort(candidateWords[i]);
       // console.log(candidate);
 
-      if (word === candidate) {
+      if (sortedWord === candidate) {
         this.anagrams.push(candidateWords[i])
       }
     }//for

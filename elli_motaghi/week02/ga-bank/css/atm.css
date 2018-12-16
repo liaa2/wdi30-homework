@@ -45,5 +45,7 @@
 
 .zero {
   background-color: #F52F4F;
+  border: 1px solid black;
   color: #FFF;
+  padding: 10px;
 }

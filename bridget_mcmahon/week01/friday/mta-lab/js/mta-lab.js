@@ -55,7 +55,7 @@ const planTrip = function(startLine, startStation, endLine, endStation) {
   // if journey is on one line ----------------------------------------
   } else if ( startLine === endLine ) {
     addStops(startPosition, endPosition, lineOneStops, startLine);
-    userMessage += `You must travel through the following stops on the ${ startLine } line: ${ lineOneStops.join(', ') }`;
+    userMessage += `You must travel through the following stops on the ${ startLine } line: ${ lineOneStops.join(', ') } \n`;
   // if you need to change stations -----------------------------------
   } else {
     addStops(startPosition, lineOneEnd, lineOneStops, startLine);

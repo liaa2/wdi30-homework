@@ -21,6 +21,8 @@ Bonus #4: Pretty much go nuts or whatever.
 */
 
 const cat = document.getElementById('cat-gif');
+const cactus1 = document.getElementById('cactus');
+const cactus2 = document.getElementById('cactus2');
 
 cat.style.position = 'absolute';
 cat.style.left = '0px';
@@ -32,7 +34,7 @@ const catWalk = function() {
   cat.style.left = position + 'px';
   if (cat.style.left == '1400px') {
     clearInterval(idForward);
-    const idBackwards = setInterval(catWalkBackwards, 50);
+    setInterval(catWalkBackwards, 50);
   }
 };
 
@@ -40,9 +42,18 @@ const catWalkBackwards = function() {
   cat.style.transform = 'scaleX(-1)';
   position = position - 10;
   cat.style.left = position + 'px';
-  if (cat.style.left == '0px') {
-    clearInterval(idBackwards);
-  }
-}
+  if (cat.style.left == '600px') {
+    clearInterval(idForward + 1);
+    cat.src = '../catwalk/images/dancing-cat.gif';
+    document.body.style.background = "#111111 url('../catwalk/images/space2.png') no-repeat top right"
+    document.body.style.backgroundSize = '100%';
+    cactus1.style.display = 'none';
+    cactus2.style.display = 'none';
+    // cat.style.transform = 'scaleX(1)';
+    // setInterval(catWalk, 50);
+    // if (cat.style.left = '650px') {
+    //   clearInterval(idForward + 2);
+    }
+};
 
 const idForward = setInterval(catWalk, 50);

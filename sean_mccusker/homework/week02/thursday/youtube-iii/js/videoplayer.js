@@ -1,3 +1,4 @@
+$('h2').funText(33, 'candy');
 const thumbnailify = function ($link) {
   const href = $link.attr('href'); // Getter
   const thumbnailURL = youtube.generateThumbnailUrl(href);

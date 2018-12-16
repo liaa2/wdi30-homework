@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  // console.log("jQuery worked");
 
   // This single line grabs the text contents of our div and returns it as one big string (the .html()
   // jQuery method would grab any child HTML it contained too), then turns it into an array by splitting

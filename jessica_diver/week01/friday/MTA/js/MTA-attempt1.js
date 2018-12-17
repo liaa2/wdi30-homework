@@ -4,6 +4,8 @@ const subwayLines = {
   "6": ['Grand Central', '33rd St', '28th Ave', '23rd Ave', 'Union Square', 'Astor Place'],
 };
 
+//create a function that figures out the direction of the train line
+
 //find indexes for each point in the journey.
  //intersection will always be union square, but index will change on different lines.
 
@@ -30,14 +32,14 @@ const trip1 = function (line, start, line2, destination) {
         leftToRight.push(subwayLines[line][i]);
       }
 
-      return `Starting from ${ start } you will travel through ${ leftToRight } on line ${ line } to get to ${ destination }`;
+      return `Starting from ${ start } you will travel through ${ leftToRight.join(', ') } on line ${ line } to get to ${ destination }`;
       // ^ if lines are the same and going from left to right through the array.
 
     } else if (endPoint < startPoint) {
-      for (let i = startPoint; i >= endPoint; i--) {
+      for (let i = startPoint; i >= endPoint; i-- ) {
         rightToLeft.push(subwayLines[line][i]);
       }
-      return `Starting from ${ start } you will travel through ${ rightToLeft } on line ${ line } to get to ${ destination }.`;
+      return `Starting from ${ start } you will travel through ${ rightToLeft.join(', ') } on line ${ line } to get to ${ destination }.`;
       // ^ if lines are the same and going from right to left through the array.
 
     }
@@ -51,14 +53,14 @@ const trip1 = function (line, start, line2, destination) {
       for (let i = endPoint; i <= endOfLine1; i++ ) {
         leftToRightLine2.push(subwayLines[line2][i]);
       }
-    return `You will travel from ${start} through ${leftToRight} change at Union Square then go through ${leftToRightLine2} until you reach ${destination}.`;
+    return `You will travel from ${start} through ${leftToRight.join(', ')} change at Union Square then go through ${leftToRightLine2} until you reach ${destination}.`;
     // ^ if lines are different, and the first part of the trip is left to right and the second part of the trip is left to right.
 
   } if (endPoint < endOfLine1) {
     for (let i = endOfLine1; i >= endPoint; i-- ){
       rightToLeftLine2.push(subwayLines[line2][i]);
    }
-   return `You will travel from ${start} through ${leftToRight} change at Union Square then go through ${rightToLeftLine2} until you reach ${destination}.`;
+   return `You will travel from ${start} through ${leftToRight.join(', ')} change at Union Square then go through ${rightToLeftLine2} until you reach ${destination}.`;
  // ^ if lines are different and the first part is from left to right but the second part is right to left.
 
  } else if ( endOfLine1 < startPoint ) {
@@ -84,6 +86,9 @@ const trip1 = function (line, start, line2, destination) {
 
 //stretch goal: identify the repetition, turn it into a function and call the function either once for same line or twice for different lines.
 // this may work properly once the functions are defined outside the final trip function as to avoid repetition/ likliness of mistakes.
+
+//create a bunch of messages that can be called on in each situation
+//validate the entry
 
 // go through the possibilities for if you have to change lines
     //test which direction and what will happen i++ for left to right and i-- from right to left

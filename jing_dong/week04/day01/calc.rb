@@ -68,7 +68,7 @@ until menu_choice == 'q'
     puts "the answer is #{Math.sqrt(a)}"
     #puts "Square roots is coming"
   when 'o'
-    
+
   else
     puts "Invalid selection"
   end

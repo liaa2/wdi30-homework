@@ -1,9 +1,11 @@
 require 'pry'
+require 'rainbow'
+
 
 # binding.pry
 
 def show_menu
-  puts "Calculator"
+  puts Rainbow("Calculator").yellow
   puts "-=" * 40
   puts "[a] - Addition"
   puts "[s] - Substraction"
@@ -57,9 +59,9 @@ until menu_choice == 'q'
     #puts "Division is coming"
   when 'e'
     puts "Enter your base number: "
-    a = gets.to_i
+    a = gets.to_f
     puts "Enter your exponent: "
-    b = gets.to_i
+    b = gets.to_f
     puts "the answer is #{a ** b}"
     #puts "Expnents is coming"
   when 'r'
@@ -68,7 +70,29 @@ until menu_choice == 'q'
     puts "the answer is #{Math.sqrt(a)}"
     #puts "Square roots is coming"
   when 'o'
-
+    puts "Enter your principal: "
+    principal = gets.to_f
+    puts "Enter your annual interest: "
+    annual_interest = (gets.to_f) / 100
+    monthly_interest = annual_interest / 12
+    puts "Enter how many years repayments: "
+    years_repayments = gets.to_f * 12
+    monthly_payment = principal * ( ( monthly_interest * ((1 + monthly_interest) ** years_repayments) ) / ( ( (1 + monthly_interest) ** years_repayments) - 1) )
+    puts "the answer is #{monthly_payment}"
+  when 'b'
+    puts "Enter your weight in KG: "
+    weight = gets.to_f
+    puts "Enter your height in Metres: "
+    height = gets.to_f
+    puts "your BMI is #{(weight / (height ** 2))}"
+  when 't'
+    puts "Enter your distance traveled by km: "
+    distance = gets.to_f
+    puts "Enter your speed in km per hour: "
+    speed = gets.to_f
+    trip_time = distance / speed
+    trip_time_in_mins = trip_time * 60
+    puts "Your trip time #{ trip_time_in_mins } mins"
   else
     puts "Invalid selection"
   end

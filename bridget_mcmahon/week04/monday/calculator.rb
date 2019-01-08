@@ -96,7 +96,6 @@ until menu_choice == 'q'
     print "Interest rate (%): "
     rate = gets.to_f
     monthly_rate = rate / 100 / 12
-    puts monthly_rate
     print "Term of loan (in months): "
     term = gets.to_i
     puts "Monthly repayment: $#{(mortgage price, deposit, term, monthly_rate).round(2)}"

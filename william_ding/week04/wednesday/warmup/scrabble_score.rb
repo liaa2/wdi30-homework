@@ -32,7 +32,7 @@ def scrabble()
   word = gets.chomp.upcase
   score = 0
   word.split("").map { |letter| score += $value[letter]}
-  puts score
+  puts "The word is #{word}, and the score is #{score}."
 end
 
 scrabble

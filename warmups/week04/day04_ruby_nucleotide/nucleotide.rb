@@ -15,3 +15,54 @@
 # C: 12
 # G: 17
 # T: 21
+
+
+def count_nucleotides(input)
+
+  bases = {
+    "A" => 0,
+    "C" => 0,
+    "G" => 0,
+    "T" => 0
+  }
+
+  dna = []
+
+  input.upcase.chars.each do |letter|
+    # puts "#{letter}"
+
+    #version 1
+    # is_nucleotides = false
+    #
+    # bases.each do |key, value|
+    #   # puts "#{key}, #{value}"
+    #
+    #   if letter == key
+    #     bases[key] += 1
+    #     is_nucleotides = true
+    #   end
+    # end #bases.each
+    #
+    # if is_nucleotides == false
+    #   dna.push "#{letter} is not a nucleotide."
+    # end #if
+
+    #version 2
+    if bases.key? letter
+      bases[letter] +=1
+    else
+      dna.push "#{letter} is not a nucleotide."
+    end
+
+  end #input.chars
+
+  bases.each do |key, value|
+    dna.push "#{key}, #{value}"
+  end
+
+  # puts bases
+  puts dna
+
+end
+
+count_nucleotides("QWEYUUUUUAGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC")

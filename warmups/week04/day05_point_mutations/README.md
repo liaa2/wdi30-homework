@@ -16,8 +16,6 @@ The Hamming distance between these two DNA strands is 7.
 
 Write a program that can calculate the Hamming difference between two DNA strands.
 
-Use a class to structure your code, if you feel confident!
-
 
 ## Source
 The _Calculating Point Mutations_ problem at [Rosalind](http://rosalind.info/problems/hamm/)

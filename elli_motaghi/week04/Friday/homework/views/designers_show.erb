@@ -4,15 +4,15 @@
 
   <h3>Designed Buildings:</h3>
 
-  <ul>
-    <% @designer.buildings.each do |building| %>
-      <li>
-        <a href="/buildings/<%= building.id %>">
-          <%= building.name %>
-        </a>
-      </li>
-    <% end %>
-  </ul>
+ 
+  <% @designer.buildings.each do |building| %>
+  <p>
+      <a id="designer-work" href="/buildings/<%= building.id %>">
+        => <%= building.name.capitalize %>
+      </a>
+  </p>
+  <% end %>
+ 
 
 <% end %>
 

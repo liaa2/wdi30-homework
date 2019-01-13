@@ -92,6 +92,7 @@ end
 
 ## Designers #####################################################################################
 
+
 # INDEX
 get "/designers" do 
     @designers = Designer.all
@@ -114,19 +115,21 @@ post "/designers" do
 end
 
 # SHOW
-get "designers/:id" do
+get "/designers/:id" do
+    puts "test"
     @designer = Designer.find params[:id]
     erb :designers_show
 end
 
+
 # EDIT
-get "designers/:id/edit" do
+get "/designers/:id/edit" do
     @designer = Designer.find params[:id]
     erb :designers_edit
 end
 
 # UPDATE
-post "designers/:id" do
+post "/designers/:id" do
     designer = Designer.find params[:id]
     designer.name = params[:name]
     designer.image = params[:image]

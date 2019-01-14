@@ -48,6 +48,8 @@ class GamesController < ApplicationController
       @user_wins = true
     end
 
+    # solution from stack overflow - https://stackoverflow.com/questions/26393870/ruby-rock-paper-scissor-game-using-while-if-else-statements-player-vs-comput
+
     render :rock_paper_scissors_result
   end
 end

@@ -11,7 +11,6 @@ Rails.application.routes.draw do
 
   # Rock Paper Scissors
   get 'games/rock_paper_scissors/' => 'games#rock_paper_scissors_play'
-  # get '/games/rock_paper_scissors/:throw' => 'games#rock_paper_scissors_result'
   get '/games/rock_paper_scissors/result' => 'games#rock_paper_scissors_result'
 end
 

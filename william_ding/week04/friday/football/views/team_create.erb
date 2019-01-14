@@ -1,6 +1,17 @@
 <h2>Create a team</h2>
 
 <form action="/new_team" method="post">
+
+  <div class="form-row">
+    <label for="league_id">League: </label>
+    <select name="league_id">
+      <option value=""></option>
+      <% League.all.each do |league| %>
+        <option value="<%= league.id %>" > <%= league.name %> </option>
+      <% end %>
+    </select>
+  </div>
+
   <div class="form-row">
     <label for="name">Name: </label>
     <input type="text" name="name" placeholder="team name.." required>

@@ -2,6 +2,13 @@
 <img src="<%= @team["logo"] %>" alt="">
 
 <table>
+  <% unless @team.league_id.nil? %>
+  <tr>
+    <th>League</th>
+    <td><%= @team.league.name %></td>
+  </tr>
+  <% end %>
+
   <tr>
     <th>City</th>
     <td><%= @team["city"] %></td>

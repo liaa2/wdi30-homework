@@ -14,26 +14,26 @@ class Team < ActiveRecord::Base
   belongs_to :league, :optional => true
 end
 
-class Plant < ActiveRecord::Base
+class League < ActiveRecord::Base
   has_many :teams
 end
 
 # Home page......
 get '/' do
-  @laliga = Team.all
+  @teams = Team.all
   erb :home
 end
 
 # Team details .........
-get '/laliga/:id' do
+get '/teams/:id' do
   @team = Team.find params[:id]
 
   erb :team_view
 end
 
 # Create teams form......
-get '/create' do
-  erb :create
+get '/team_create' do
+  erb :team_create
 end
 
 # Create teams results.....
@@ -53,50 +53,89 @@ post '/new_team' do
 end
 
 # Edit team.......
-get '/laliga/:id/edit' do
-  @team = query_db "SELECT * FROM laliga WHERE id='#{ params[:id] }'"
-  @team = @team.first
-  # @team.to_s
-  erb :edit
+get '/teams/:id/edit' do
+  @team = Team.find params[:id]
+  erb :team_edit
 end
 
 post '/edit' do
-  query = "UPDATE laliga SET name='#{params[:name]}', city='#{params[:city]}', stadium='#{params[:stadium]}', stadium_capacity='#{params[:stadium_capacity]}', last_rank='#{params[:last_rank]}', title='#{params[:title]}', logo='#{params[:logo]}' WHERE id='#{params[:id]}'"
-  query_db query
+  team = Team.find params[:id]
+  team.league_id = params[:league_id]
+  team.name=params[:name]
+  team.city=params[:city]
+  team.stadium=params[:stadium]
+  team.stadium_capacity=params[:stadium_capacity]
+  team.last_rank=params[:last_rank]
+  team.title=params[:title]
+  team.logo=params[:logo]
+  team.id=params[:id]
+  team.save
 
-  redirect to("/laliga/#{params[:id]}")
+  redirect to("/teams/#{params[:id]}")
   # params.to_s
 end
 
 
 
 # Delete teams......
-get '/laliga/:id/delete' do
-  query_db "DELETE FROM laliga WHERE id=#{ params[:id] }"
+get '/teams/:id/delete' do
+  team = Team.find params[:id]
+  team.destroy;
 
   redirect to('/')
 end
 
+############# Leagues ###################
+get '/leagues_view' do
+  @leagues = League.all
+  erb :leagues_show
+end
+
+get '/leagues/:id' do
+  @league = League.find params[:id]
+
+  erb :leagues_view
+end
+
+get '/leagues_create' do
+  erb :leagues_create
+end
+
+post '/new_league' do
+  league = League.new
+  league.name = params[:name]
+  league.country = params[:country]
+  league.logo = params[:logo]
+  league.save
+
+  redirect to('/leagues_view')
+end
+
+get '/leagues/:id/edit' do
+  @league = League.find params[:id]
+  erb :leagues_edit
+end
+
+post '/league_edit' do
+  league = League.find params[:id]
+  league.name = params[:name]
+  league.country = params[:country]
+  league.logo = params[:logo]
+  league.save
+
+  redirect to('/leagues_view')
+end
+
+get '/leagues/:id/delete' do
+  league = League.find params[:id]
+  league.destroy;
+
+  redirect to('/leagues_view')
+end
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def query_db(sql_command)
-  db = SQLite3::Database.new 'database.sqlite3'
-  db.results_as_hash = true
-  results = db.execute sql_command
-  db.close
-  results
+get '/leagues/:id/show_teams' do
+  @league = League.find params[:id]
+  @teams = Team.all
+  erb :show_teams_in_league
 end

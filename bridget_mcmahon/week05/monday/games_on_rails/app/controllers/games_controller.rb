@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  # Magic 8 Ball
+  ################ Magic 8 Ball ################
   def magic_8_ball
     render :magic_8_ball
   end
@@ -12,36 +12,42 @@ class GamesController < ApplicationController
     render :magic_8_ball_fortune
   end
 
-  # Secret Number
+  ################# Secret Number #################
   def secret_number
     render :secret_number
   end
 
   def secret_number_result
     @secret_number = (1..10).to_a.sample
+    @win = false
 
     if @secret_number == params["number"].to_i
-      render :secret_number_correct
-    else
-      render :secret_number_incorrect
+      @win = true
     end
+
+    render :secret_number_result
   end
 
-  # Rock Paper Scissors
+  ############### Rock Paper Scissors ###############
   def rock_paper_scissors_play
     render :rock_paper_scissors_play
   end
 
   def rock_paper_scissors_result
-    user_throw = params[:throw]
-    throws = ["rock", "paper", "scissors"]
-    computer_throw = throws.sample
-    user_wins = false
+    throws = ["rock", "scissors", "paper"]
+    user_throw = params[:throw].downcase
+    user_index = throws.index(user_throw)
+    @computer_throw = throws.sample.to_s
+    computer_index = throws.index(@computer_throw)
+    @user_wins = false
+    @draw = false
 
-    if user_throw == computer_throw
-      render :rock_paper_scissors_win
-    else
-      render :rock_paper_scissors_lose
+    if @computer_throw == user_throw
+      @draw = true
+    elsif throws[computer_index - 1] == throws[user_index]
+      @user_wins = true
     end
+
+    render :rock_paper_scissors_result
   end
 end

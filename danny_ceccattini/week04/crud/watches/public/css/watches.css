@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Charm|Great+Vibes|Nanum+Myeongjo|Playfair+Display');
-/* font-family: 'Charm', cursive;
+@import url('https://fonts.googleapis.com/css?family=Cinzel|EB+Garamond|Playfair+Display');
+/* font-family: 'EB Garamond', serif;
 font-family: 'Playfair Display', serif;
-font-family: 'Nanum Myeongjo', serif;
-font-family: 'Great Vibes', cursive; */
-
+font-family: 'Cinzel', serif; */
 
 body {
   background-color: blanchedalmond;
@@ -20,7 +18,7 @@ h1 {
 }
 
 h2 {
-  font-family: 'Charm', cursive;
+  font-family: 'Cinzel', serif;
 }
 
 nav {

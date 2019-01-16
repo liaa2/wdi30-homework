@@ -11245,3 +11245,52 @@ Processing by PlayersController#index as HTML
 Completed 200 OK in 24ms (Views: 21.1ms | ActiveRecord: 0.2ms)
 
 
+Started GET "/" for 127.0.0.1 at 2019-01-16 09:49:35 +1100
+Processing by PlayersController#home as HTML
+  Rendering players/home.html.erb within layouts/application
+  Rendered players/home.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 248ms (Views: 245.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/players" for 127.0.0.1 at 2019-01-16 10:07:15 +1100
+Processing by PlayersController#index as HTML
+  Rendering players/index.html.erb within layouts/application
+  [1m[36mPlayer Load (1.5ms)[0m  [1m[34mSELECT "players".* FROM "players"[0m
+  ↳ app/views/players/index.html.erb:2
+  Rendered players/index.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 63ms (Views: 28.8ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/players/new" for 127.0.0.1 at 2019-01-16 10:07:21 +1100
+Processing by PlayersController#new as HTML
+  Rendering players/new.html.erb within layouts/application
+  Rendered players/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 27ms (Views: 23.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/players" for 127.0.0.1 at 2019-01-16 10:07:23 +1100
+Processing by PlayersController#index as HTML
+  Rendering players/index.html.erb within layouts/application
+  [1m[36mPlayer Load (0.2ms)[0m  [1m[34mSELECT "players".* FROM "players"[0m
+  ↳ app/views/players/index.html.erb:2
+  Rendered players/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 22ms (Views: 19.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/players/17" for 127.0.0.1 at 2019-01-16 10:07:28 +1100
+Processing by PlayersController#show as HTML
+  Parameters: {"id"=>"17"}
+  [1m[36mPlayer Load (0.2ms)[0m  [1m[34mSELECT  "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 17], ["LIMIT", 1]]
+  ↳ app/controllers/concerns/players_controller.rb:10
+  Rendering players/show.html.erb within layouts/application
+  Rendered players/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 39ms (Views: 34.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-01-16 10:07:31 +1100
+Processing by PlayersController#home as HTML
+  Rendering players/home.html.erb within layouts/application
+  Rendered players/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 23ms (Views: 19.9ms | ActiveRecord: 0.0ms)
+
+

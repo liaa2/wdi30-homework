@@ -1,0 +1,10 @@
+<h2>All Teams</h2>
+
+<% @teams.each do |t| %>
+<div>
+  <% if t.image.present? %>
+  <%= link_to image_tag(t.image), t %>
+  <% end %>
+  <%= link_to t.name, t %>
+</div>
+<% end %>

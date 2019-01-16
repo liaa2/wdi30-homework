@@ -1,0 +1,13 @@
+<h2><%= @country.name %></h2>
+<%= image_tag @country.image if @country.image.present? %>
+
+<% @teams.each do |t| %>
+<div>
+  <% if t.country_id == @country.id %>
+    <% if t.image.present? %>
+      <%= link_to image_tag(t.image), t %>
+    <% end %>
+    <%= link_to t.name, t %>
+  <% end %>
+</div>
+<% end %>

@@ -1,0 +1,14 @@
+<h2><%= @player.name %></h2>
+<%= image_tag @player.image if @player.image.present? %>
+<p>Name: <%= @player.name %></p>
+<p>Position: <%= @player.position %></p>
+<p>Nation: <%= @player.nation %></p>
+<p>Team: <%= @player.team.name if @player.team_id.present? %></p>
+<p>Age: <%= @player.age %></p>
+<p>Rating: <%= @player.rating %></p>
+
+<div class="controls">
+  <%= link_to 'Edit Player', edit_player_path(@player) %>
+
+  <%= link_to 'Delete player', player_path(@player.id), :method=>"delete" %>
+</div>

@@ -1,0 +1,10 @@
+<h2>All Countries</h2>
+
+<% @countries.each do |p| %>
+<div>
+  <% if p.image.present? %>
+  <%= link_to image_tag(p.image), p %>
+  <% end %>
+  <%= link_to p.name, p %>
+</div>
+<% end %>

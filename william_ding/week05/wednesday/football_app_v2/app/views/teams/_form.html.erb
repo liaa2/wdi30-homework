@@ -1,0 +1,21 @@
+<%= form_for @team do |f|%>
+  <%= f.label :name %>
+  <%= f.text_field :name, :required=>true%>
+
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+
+  <%= f.label :stadium %>
+  <%= f.text_field :stadium %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :image %>
+  <%= f.text_field :image %>
+
+  <%= f.label :country_id %>
+  <%= f.select :country_id, Country.pluck(:name, :id) %>
+
+  <%= f.submit %>
+<% end %>

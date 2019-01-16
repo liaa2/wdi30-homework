@@ -1,24 +1,41 @@
-<%= form_for @player do |f|%>
+<%= form_for @player, :html => {:class=>"mdl-grid"} do |f|%>
+  <div>
   <%= f.label :name %>
   <%= f.text_field :name, :required=>true%>
+  </div>
 
+  <div>
   <%= f.label :nation %>
   <%= f.text_field :nation %>
+  </div>
 
+  <div>
   <%= f.label :position %>
   <%= f.text_field :position %>
+  </div>
 
+  <div>
   <%= f.label :rating %>
   <%= f.text_field :rating %>
+  </div>
 
+  <div>
   <%= f.label :age %>
   <%= f.text_field :age %>
+  </div>
 
+  <div>
   <%= f.label :image %>
   <%= f.text_field :image %>
+  </div>
 
+  <div>
   <%= f.label :team_id %>
   <%= f.select  :team_id, Team.pluck(:name, :id)%>
+  </div>
 
+  <div>
   <%= f.submit %>
+  </div>
+
 <% end %>

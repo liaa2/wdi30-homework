@@ -142,25 +142,25 @@ Team.create(
 Country.destroy_all
 Country.create(
   :name => "England",
-  :image => "/assets/england.png"
+  :image => "https://futhead.cursecdn.com/static/img/19/nations/14.png"
 )
 
 Country.create(
-  :name => "England2",
-  :image => "/assets/england.png"
+  :name => "Spain",
+  :image => "https://futhead.cursecdn.com/static/img/19/nations/45.png"
 )
 
 Country.create(
-  :name => "England3",
-  :image => "/assets/england.png"
+  :name => "France",
+  :image => "https://futhead.cursecdn.com/static/img/19/nations/18.png"
 )
 
 Country.create(
-  :name => "England4",
-  :image => "/assets/england.png"
+  :name => "Italy",
+  :image => "https://futhead.cursecdn.com/static/img/19/nations/27.png"
 )
 
 Country.create(
-  :name => "England5",
-  :image => "/assets/england.png"
+  :name => "Germany",
+  :image => "https://futhead.cursecdn.com/static/img/19/nations/21.png"
 )

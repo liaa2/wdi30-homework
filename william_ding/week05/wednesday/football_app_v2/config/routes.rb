@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :players
   resources :teams
   resources :countries
+  get '/search' => "application#search"
 end

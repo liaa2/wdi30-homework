@@ -100,10 +100,10 @@ Player.create(
 Team.destroy_all
 Team.create(
   :name => "Real Madrid",
-  :city => "My City",
+  :city => "Madrid",
   :stadium => "My Stadium",
   :title => 30,
-  :image => "http://fillmurray.com/100/100"
+  :image => "https://futhead.cursecdn.com/static/img/19/clubs/243.png"
 )
 
 Team.create(
@@ -138,6 +138,46 @@ Team.create(
   :image => "http://fillmurray.com/100/100"
 )
 
+Team.create(
+  :name => "Real Madrid6",
+  :city => "My City",
+  :stadium => "My Stadium",
+  :title => 30,
+  :image => "http://fillmurray.com/100/100"
+)
+
+Team.create(
+  :name => "Real Madrid7",
+  :city => "My City",
+  :stadium => "My Stadium",
+  :title => 30,
+  :image => "http://fillmurray.com/100/100"
+)
+
+Team.create(
+  :name => "Real Madrid8",
+  :city => "My City",
+  :stadium => "My Stadium",
+  :title => 30,
+  :image => "http://fillmurray.com/100/100"
+)
+
+Team.create(
+  :name => "Real Madrid9",
+  :city => "My City",
+  :stadium => "My Stadium",
+  :title => 30,
+  :image => "http://fillmurray.com/100/100"
+)
+
+Team.create(
+  :name => "Real Madrid10",
+  :city => "My City",
+  :stadium => "My Stadium",
+  :title => 30,
+  :image => "http://fillmurray.com/100/100"
+)
+
 
 Country.destroy_all
 Country.create(
@@ -163,4 +203,9 @@ Country.create(
 Country.create(
   :name => "Germany",
   :image => "https://futhead.cursecdn.com/static/img/19/nations/21.png"
+)
+
+Country.create(
+  :name => "Australia",
+  :image => "https://futhead.cursecdn.com/static/img/19/nations/195.png"
 )

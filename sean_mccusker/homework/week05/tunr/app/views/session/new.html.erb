@@ -5,11 +5,16 @@
 <% end %>
 
 <%= form_tag login_path do %>
-  <%= label_tag :email %>
-  <%= email_field_tag :email %>
 
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
+  <div class="form-row">
+    <%= label_tag :email %>
+    <%= email_field_tag :email, nil, :class => 'form-control' %>
+  </div>
+
+  <div class="form-row">
+    <%= label_tag :password %>
+    <%= password_field_tag :password, nil, :class => 'form-control' %>
+  </div>
 
   <%= submit_tag "Sign in" %>
 <% end %>

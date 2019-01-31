@@ -62,7 +62,10 @@ console.log("------------------");
 
 // Return an object that says how many even numbers and how many odd numbers there are in numbers
 console.log("7. EVENS & ODDS:");
-
+const evensAndOdds = _(numbers).countBy(function(num) {
+  return num % 2 === 0 ? 'evens' : 'odds';
+});
+console.log(evensAndOdds);
 console.log("------------------");
 
 // Get three random numbers out of numbers

@@ -13,13 +13,15 @@ const fetchBook = function () {
   xhr.onreadystatechange = function () {
     if (xhr.readyState !== 4) {
       return;
-    }
+    };
+
     const data = JSON.parse(xhr.responseText);
     const volumeInfo = data["items"][0]["volumeInfo"];
     const title = volumeInfo["title"];
     const author = volumeInfo["authors"];
     const thumbnail = volumeInfo["imageLinks"]["thumbnail"];
     const synopsis = volumeInfo["description"];
+
     document.querySelector('.book-title').innerHTML = title;
     document.querySelector('.author-title').innerHTML = `By: ${author}`;
     document.querySelector('.book-image').src = thumbnail;
@@ -38,9 +40,10 @@ const fetchBook = function () {
 
 };
 
-// document.getElementById('search-btn').addEventListener('click', fetchBook);
-document.querySelector('#search-input').addEventListener('keypress', function(e) {
-  if (e.keyCode === 13) {
-    fetchBook();
-  }
-});
+document.getElementById('search-btn').addEventListener('click', fetchBook);
+
+// document.querySelector('#search-input').addEventListener('keypress', function(e) {
+//   if (e.keyCode === 13) {
+//     fetchBook();
+//   };
+// });

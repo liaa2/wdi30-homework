@@ -12,40 +12,75 @@ var people = [
 // Exercises
 //
 // Iterate through numbers and log each number to the console
+console.log('/////////////// _.each //////////////////////');
 const numberList = _.each(numbers, function(num) {
   console.log(num);
 });
 
+// Joel solution //
+console.log('/////////// _.each - 2nd solution //////////////////');
+_(numbers).each(function (n, index, array) {
+  console.log(n);
+});
+
 // Iterate through numbers and multiply each one of them by 5
+console.log('//////////// _.map /////////////////////');
 const numbersFive = _.map(numbers, function(num) {
   return num * 5;
 });
 
 console.log(numbersFive);
 
+console.log('///////////// _.map - 2nd solution //////////////////');
+const times5 = function(number) {
+  return number * 5;
+};
+
+const multiplesOf5 = _(numbers).map(times5);
+console.log(numbers, multiplesOf5);
+
 // Iterate through numbers and reduce it by adding them together
+console.log('/////////// _.reduce ///////////////');
+
 const reduceNumbers = _.reduce(numbers, function(memo, num) {
+  console.log('memo', memo, 'num', num);
   return memo + num;
-}, 0);
+});
 
 console.log(reduceNumbers);
 
 // Get an array of all of the people in people that have the username "E"
-const username = _.pluck(_.where(people, {username : "E"}), 'id');
+console.log('//////////// _.where /////////////////////');
+const username = _.where(people, {username : "E"});
 
-console.log(username);
+console.table(username);
 
 // Find the first object in people that has the id of 3
-const id3 = _.findWhere(people, {id : 3});
+console.log('//////////// _.findWhere /////////////////////');
+const id3 = _(people).findWhere( {id : 3});
 
-console.log(id3);
+console.table(id3);
 // Find the first person who has an age of less than 50
-const age = _.findWhere(people, {"age" :50});
+console.log('//////////// _.find /////////////////////');
+const youngPerson = _(people).find( function(person) {
+  return person.age < 50;
+});
 
-console.log(age);
+console.table(youngPerson);
 
 // Get an array of all of the people with an age of over 60
-_.map()
+console.log('//////////// _.filter /////////////////////');
+
+const olderPeople = _(people).filter(function (person) {
+  return person.age > 60;
+});
+
+console.table(olderPeople);
 
 // Remove all of the people with an age less than 40
-_.filter()
+console.log('//////////// _.reject /////////////////////');
+
+const adults = _(people).reject((person) => person.age < 40);
+
+
+console.table(adults);

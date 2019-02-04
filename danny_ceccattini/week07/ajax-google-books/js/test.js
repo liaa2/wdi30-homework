@@ -5,7 +5,7 @@
 // const synopsis = data["items"][3]["volumeInfo"]["description"];
 
 
-bookTitle = "Jaws";
+bookTitle = "Kapital";
 const xhr = new XMLHttpRequest();
 xhr.open('GET', `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}`);
 xhr.send();

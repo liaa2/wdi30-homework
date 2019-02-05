@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: transparent;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+ .container {
+   width: 965px;
+   max-width: 100%;
+   margin: auto;
+   min-width:420px;
+   padding: 1em;
+
+   background-color: #f5f5f5;
+ }
+
+ .container:after {
+     content: "";
+     display: table;
+     clear: both;
+ }
+
+@media screen and (max-width: 965px) {
+  .container {
+      padding: 0 25px;
+  }
+}
+
+.book-container {
+  width: 965px;
+  max-width: 100%;
+  margin: auto;
+  min-width:420px;
+  padding: 1em;
+
+  background-color: #f5f5f5;
+  border-bottom: 1px solid white;
+}
+
+.book-container:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 965px) {
+ .book-container {
+     padding: 0 25px;
+ }
+}
+
+
+.booktitle {
+  font-size: 90%;
+}
+
+.bookcover {
+  float: left;
+  margin-right: 12px;
+}
+
+.bookcover img {
+    padding: 1px;
+}
+
+img[Attributes Style] {
+    width: 128px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+}
+
+.search-bar {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+input:focus {
+	outline: none;
+}

@@ -10,28 +10,23 @@ const fetchFact = function (name) {
     }
 
     const data = JSON.parse(xhr.responseText).items[0]; // Translate the string reposne into a real JS object
-    // console.log(data);
-    // console.log(data.volumeInfo.authors);
+
     $("#title").text(data.volumeInfo.title);
     $("#author").text(data.volumeInfo.authors);
     $("#thumbnail").attr('src', data.volumeInfo.imageLinks.thumbnail);
-    // const p = document.createElement('p');
-    // p.innerHTML = data.text;
-    // document.body.appendChild(p);
+
   }
 
   xhr.send();// press enter: strat the ASYCHRONOUS request
 
 };
 
-//document.getElementById('fetch').addEventListener('click', fetchFact);
-
-//fetchFact('harry potter');
 $("#search-form").on('submit', function (e) {
   e.preventDefault();
   if ($('#bookname').val() !== "")
   fetchFact ($('#bookname').val());
 });
+
 $('#search').on('click', function() {
   if ($('#bookname').val() !== "")
   fetchFact ($('#bookname').val());

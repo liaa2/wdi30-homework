@@ -1,5 +1,16 @@
+.wrapper {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-areas:
+    "a a a c"
+    "b b b c"
+    "b b b c"
+    "b b b c";
+  justify-content: center;
+}
+
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
+  font: 44px "Century Gothic", Futura, sans-serif;
   margin: 20px;
 }
 
@@ -21,15 +32,15 @@ ol, ul {
   background: #fff;
   border: 1px solid #999;
   float: left;
-  font-size: 24px;
+  font-size: 80px;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
+  height: 150px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 150px;
 }
 
 .square:focus {

@@ -42,7 +42,7 @@ const balance = {
 
 const updateScreen = function() { //function to update screen with amount. Using html() method to set the contents of all elements with class of 'checking-balance' and 'savings-balance' with the property values from balance object
 
-  $('#checking-balance').html( balance.checking);
+  $('#checking-balance').html( balance.checking);//html()代表了html相对应id的内容，在这里，代表着$0
   $('#savings-balance').html( balance.savings);
   colourChange();
 }
@@ -64,7 +64,7 @@ const colourChange = function() {
 
 //deposit function passes the amount & account arguments based on user input
 const deposit = function(amount, account) {
-  balance[account] += parseInt(amount); //the parseInt will need to convert the amount of the displayed in the account into a number
+  balance[account] += Number(amount); //the parseInt will need to convert the amount of the displayed in the account into a number
   updateScreen(); //run updatescreen function to display new balance after deposit
 };
 
@@ -72,9 +72,9 @@ const deposit = function(amount, account) {
 const withdraw = function(amount, account) {
 
 if (amount <= balance[account]) { //normal withdrawal when amount is < savings or checking account
-    balance[account] -= parseInt(amount); //x = x - y parseInt can also be +
+    balance[account] -= Number(amount); //x = x - y parseInt can also be +
   } else if (amount <= balance.checking + balance.savings) { //overdraft kicks in when amount < total balance in both accs
-    const overdraftAmt = balance[account] - parseInt(amount); //amount to be overdraft
+    const overdraftAmt = balance[account] - Number(amount); //amount to be overdraft
     balance[account] = 0 //let the overdrawn account = 0
     if (balance.checking === 0) { //two scenarios here - if balance.checking account is 0 then take the overdraft amount defined above from the balance.savings account and vice versa for the other account
       balance.savings += overdraftAmt;

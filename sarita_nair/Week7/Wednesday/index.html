@@ -4,18 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Book search</title>
+  <title>Document</title>
   <script src="js/jquery.js"></script>
+  <script src="js/ajaxcall.js"></script>
   <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
-<!-- <label for="bookname">Book Title:</label> -->
-<form>
-  <input type="text" id="bookname" value="Jaws">
-  <button id="search">search</button>
-</form>
+<div class="container">
+  <form id="search">
+    <input type="search" id="query" required autofocus placeholder="butterflies">
+    <button>Search</button>
+  </form>
+  <div id="images">
 
-<script src="js/books.js"></script>
-
+  </div>
+</div>
 </body>
 </html>

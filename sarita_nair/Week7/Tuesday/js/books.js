@@ -1,6 +1,6 @@
 const fetchFact = function(name){
   const xhr = new XMLHttpRequest();
-  xhr.open('GET','https://www.googleapis.com/books/v1/volumes?q=search+'+ name);
+  xhr.open('GET','https://www.googleapis.com/books/v1/volumes?q='+ name);
   xhr.onreadystatechange = function(){
     if (xhr.readyState !== 4){
       return;
@@ -8,11 +8,12 @@ const fetchFact = function(name){
     // console.log( xhr.responseText);
     const data = JSON.parse(xhr.responseText);
     // console.log(data["items"]["volumnInfo"]);
-    console.log(data["items"][0]["volumeInfo"]["imageLinks"]["smallThumbnail"]);
-    const title = data["items"][0]["volumeInfo"]["title"];
-    const imagelink = data["items"][0]["volumeInfo"]["imageLinks"]["smallThumbnail"];
-    console.log(data["items"][0]["volumeInfo"]);
-    const authors = data["items"][0]["volumeInfo"]["authors"];
+    // debugger;
+    // console.log(data["items"][0]["volumeInfo"]["imageLinks"]["smallThumbnail"]);
+    const title = data.items[0].volumeInfo.title;//data["items"][0]["volumeInfo"]["title"];
+    const imagelink = data.items[0].volumeInfo.imageLinks.smallThumbnail;//data["items"][0]["volumeInfo"]["imageLinks"]["smallThumbnail"];
+    // console.log(data["items"][0]["volumeInfo"]);
+    const authors = data.items[0].volumeInfo.authors;//data["items"][0]["volumeInfo"]["authors"];
     // console.log(authors);
     const p = document.createElement('p');
     p.innerHTML = title;
@@ -43,6 +44,7 @@ const fetchFact = function(name){
 
     // p.appendTo('div');
     // document.body.appendChild(p);
+
     // div.appendChild(img);
 
     // document.body.innerHTML = data.text;
@@ -54,7 +56,8 @@ const fetchFact = function(name){
   xhr.send();
 };
 
-$('#search').on('click', function(){
+$('#search').on('click', function(event){
+  event.preventDefault();
   if($('#bookname').val() !== "")
   fetchFact($('#bookname').val());
 });

@@ -1,0 +1,15 @@
+<h1>Your Proxy 👁‍🗨</h1>
+
+<script>
+
+  // $.ajax("http://www.smh.com.au")
+  // $.ajax("http://localhost:3000/fetch?url=http://www.smh.com.au")
+  $.ajax("http://localhost:3000/fetch?url=http://www.google.com.au")
+  .done(response => {
+    console.log(response.data)
+  })
+  .fail(error => {
+    console.warn(error)
+  })
+
+</script>

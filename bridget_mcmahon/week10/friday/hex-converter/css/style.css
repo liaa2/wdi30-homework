@@ -9,6 +9,8 @@ body {
   max-width:960px;
   margin: 0 auto;
   text-align: center;
+  font-size: 140%;
+
 }
 
 header {
@@ -30,4 +32,14 @@ canvas {
 
 form {
   margin: 10px;
+}
+
+#submit {
+  display: block;
+  margin: 15px auto 0 auto;
+  font-size: 140%;
+  width: 20%;
+  background-color: black;
+  color: white;
+  font-family: monospace;
 }

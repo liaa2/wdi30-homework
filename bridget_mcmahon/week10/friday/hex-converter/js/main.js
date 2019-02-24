@@ -2,23 +2,48 @@ $(document).ready(function() {
 
   $('#submit').on('click', function(e) {
     e.preventDefault();
-    const $color = $('#color-input').val();
+    const $hex = $('#hex-input').val();
+    const $rgb = $('#rgb-input').val();
+    const $hsl = $('#hsl-input').val();
 
-    $('.hex').text($color);
+    if ($hex !== "") {
+      const rgbColor = hexToRGB($hex);
+      const hslColor = rgbToHSL(rgbColor);
 
-    const rgbColor = hexToRGB($color);
-    $('.rgb').text(rgbColor);
+      $('.hex').text($hex);
+      $('.rgb').text(rgbColor);
+      $('.hsl').text(hslColor);
+      $('body').css('backgroundColor', $hex)
+    } else if ($rgb !== "") {
+      const hexColor = rgbToHex($rgb);
+      const hslColor = rgbToHSL($rgb);
 
-    const hslColor = rgbToHSL(rgbColor);
-    $('.hsl').text(hslColor);
+      $('.hex').text(hexColor);
+      $('.rgb').text($rgb);
+      $('.hsl').text(hslColor);
+      $('body').css('backgroundColor', $rgb)
+    } else if ($hsl !== "") {
+      const rgbColor = hslToRGB($hsl);
+      const hexColor = rgbToHex(rgbColor);
+
+      $('.hex').text(hexColor);
+      $('.rgb').text(rgbColor);
+      $('.hsl').text($hsl);
+      $('body').css('backgroundColor', $hsl)
+    }
+
+    $('#hex-input').val('');
+    $('#rgb-input').val('');
+    $('#hsl-input').val('');
   });
 
 }); // document ready
 
 // ------------ HEX TO RGB ------------
 const hexToRGB = (color) => {
-  const pattern = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})/;
+  const pattern = /#(..)(..)(..)/;
   const colorsSplit = color.split(pattern).filter(n => n);
+  console.log(colorsSplit);
 
   const r = parseInt(colorsSplit[0], 16);
   const g = parseInt(colorsSplit[1], 16);
@@ -45,10 +70,8 @@ const rgbToHex = (color) => {
   const g = colorToHex(hexSplit[1]);
   const b = colorToHex(hexSplit[2]);
 
-  console.log(r, g, b);
   return `#${r}${g}${b}`;
 };
-console.log(rgbToHex('rgb(100, 210, 17)'));
 
 // ------------ RGB TO HSL ------------
 const rgbToHSL = (color) => {

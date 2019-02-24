@@ -15,39 +15,67 @@ $(document).ready(function() {
 
 }); // document ready
 
-
+// ------------ HEX TO RGB ------------
 const hexToRGB = (color) => {
-  let pattern = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})/;
-  let colorsSplit = color.split(pattern).filter(n => n);
+  const pattern = /^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})/;
+  const colorsSplit = color.split(pattern).filter(n => n);
 
-  let r = parseInt(colorsSplit[0], 16);
-  let g = parseInt(colorsSplit[1], 16);
-  let b = parseInt(colorsSplit[2], 16);
+  const r = parseInt(colorsSplit[0], 16);
+  const g = parseInt(colorsSplit[1], 16);
+  const b = parseInt(colorsSplit[2], 16);
 
-  return `rgb(${r}, ${g}, ${b})`
+  return `rgb(${r}, ${g}, ${b})`;
 };
 
-hexToRGB('#ffffff');
+// ------------ RGB TO HEX ------------
+const colorToHex = (rgbColor) => {
+  let hex = Number(rgbColor).toString(16);
+  if (hex.length < 2) {
+    hex = "0" + hex;
+  }
 
+  return hex;
+};
+
+const rgbToHex = (color) => {
+  const pattern = /rgb\(([0-9]{1,3}), ([0-9]{1,3}), ([0-9]{1,3})\)/
+  const hexSplit = color.split(pattern).filter(n => n);
+
+  const r = colorToHex(hexSplit[0]);
+  const g = colorToHex(hexSplit[1]);
+  const b = colorToHex(hexSplit[2]);
+
+  console.log(r, g, b);
+  return `#${r}${g}${b}`;
+};
+console.log(rgbToHex('rgb(100, 210, 17)'));
+
+// ------------ RGB TO HSL ------------
 const rgbToHSL = (color) => {
-  console.log(color);
-  // pull out RGB values
   let regex = /rgb\(([0-9]{1,3}), ([0-9]{1,3}), ([0-9]{1,3})\)/
   let [, r, g, b] = color.match(regex);
 
-  // convert RGB values to range 0-1 (divide by 255)
   r = (r / 255).toFixed(2);
   g = (g / 255).toFixed(2);
   b = (b / 255).toFixed(2);
 
-  // find min and max values of rgb
   let min = Math.min(r, g, b);
   let max = Math.max(r, g, b);
 
-  // L: adding max and min then divide by 2
-  let l = ((min + max) / 2)
+  let l = ((min + max) / 2);
+  const s = calculateSat(min, max, l);
+  let h = 0;
+  if (s !== 0) {
+    h = calculateHue(min, max, r, g, b);
+  }
 
-  // S:
+  l = Math.round(l * 100);
+
+  return `hsl(${h}, ${s}%, ${l}%)`;
+};
+
+//  SATURATION CALCULATION
+const calculateSat = (min, max, l) => {
   let s;
   if (min === max) {
     s = 0;
@@ -58,13 +86,17 @@ const rgbToHSL = (color) => {
   };
   s = Math.round(s * 100);
 
-  // H: calculate max value
+  return s;
+};
+
+// HUE CALCULATION
+const calculateHue = (min, max, r, g, b) => {
   let h;
-  if (max === r) {
+  if (max.toFixed(2) === r) {
     h = (g - b) / (max - min);
-  } else if (max === g) {
+  } else if (max.toFixed(2) === g) {
     h = 2.0 + (b - r) / (max - min);
-  } else {
+  } else if (max.toFixed(2) === b) {
     h = 4.0 + (r - g) / (max - min);
   }
 
@@ -72,10 +104,70 @@ const rgbToHSL = (color) => {
   if (h < 0) {
     h += 360;
   }
-
-  l = Math.round(l * 100);
-
-  return `hsl: ${h}, ${s}%, ${l}%`;
+  return h;
 };
 
-console.log(rgbToHSL('rgb(24, 98, 118)'));
+
+// ------------ HSL TO RGB ------------
+// CHECK BETWEEN 0 and 1
+const checkZeroToOne = (num) => {
+  if (num < 0) {
+    num += 1
+  } else if (num > 1) {
+    num -= 1;
+  }
+  return num;
+};
+
+// FIND FORMULA FOR RGB CALC
+const findFormula = (temp1, temp2, tempColor) => {
+  let output;
+  if ((tempColor * 6) < 1) {
+    output = temp2 + (temp1 - temp2) * 6 * tempColor;
+  } else if ((tempColor * 2) < 1) {
+    output = temp1;
+  } else if ((tempColor * 3) < 2) {
+    output = temp2 + (temp1 - temp2) * (0.666 - tempColor) * 6;
+  } else {
+    output = temp2;
+  }
+
+  return output;
+};
+
+const hslToRGB = (color) => {
+  let regex = /hsl\(([0-9]{1,3}), ([0-9]{1,3})%, ([0-9]{1,3})%\)/
+  let [, h, s, l] = color.match(regex);
+  s /= 100;
+  l /= 100;
+  let r, g, b;
+
+  if (s === 0) {
+    r = g = b = (l * 255);
+  } else {
+    let temp1, temp2;
+
+    if (l < 50) {
+      temp1 = l * (1 + s);
+    } else {
+      temp1 = l + s - l * s;
+    }
+
+    temp2 = 2 * l - temp1;
+
+    h = h / 360;
+
+    let tempR = h + 0.333;
+    checkZeroToOne(tempR);
+    let tempG = h;
+    checkZeroToOne(tempG);
+    let tempB = h - 0.333;
+    checkZeroToOne(tempB);
+
+    r = findFormula(temp1, temp2, tempR);
+    g = findFormula(temp1, temp2, tempG);
+    b = findFormula(temp1, temp2, tempB);
+  }
+
+  return `rgb(${r * 255}, ${g * 255}, ${b * 255})`;
+};

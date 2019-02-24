@@ -12,7 +12,7 @@ Write Ruby code that takes word problems in the following formats:
 
 and returns the answer as an integer.
 
-You should use define a Calculator class which uses the constructor function (`initialize`) to set the question, and an `answer` method to return the answer.
+You should define a Calculator class which uses the constructor function (`initialize`) to set the question, and an `answer` method to return the answer.
 
 Use a regular expression to parse the question.
 

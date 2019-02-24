@@ -43,7 +43,6 @@ $(document).ready(function() {
 const hexToRGB = (color) => {
   const pattern = /#(..)(..)(..)/;
   const colorsSplit = color.split(pattern).filter(n => n);
-  console.log(colorsSplit);
 
   const r = parseInt(colorsSplit[0], 16);
   const g = parseInt(colorsSplit[1], 16);
@@ -170,13 +169,14 @@ const hslToRGB = (color) => {
   } else {
     let temp1, temp2;
 
-    if (l < 50) {
+    if (l < 0.5) {
       temp1 = l * (1 + s);
     } else {
       temp1 = l + s - l * s;
     }
 
     temp2 = 2 * l - temp1;
+    console.log('temps', temp1, temp2);
 
     h = h / 360;
 
@@ -192,5 +192,5 @@ const hslToRGB = (color) => {
     b = findFormula(temp1, temp2, tempB);
   }
 
-  return `rgb(${r * 255}, ${g * 255}, ${b * 255})`;
+  return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
 };

@@ -73,7 +73,11 @@ $(document).ready(function(){
 
   // Load our text file over AJAX
   // NOTE: for this to work you will have to run a server on your laptop,
-  // i.e. by typing the command 'python -m SimpleHTTPServer' in this folder
+  // i.e. by typing the command 'python -m SimpleHTTPServer' in this folder ('python -m http.server' for newer versions of python)
+  // OR
+  // alternatively you could run a node server by simply running 'http-server'
+  // If you are thrown an error you may have to download http-server by running npm install -g http-server
+
   $.ajax(bookFilename)
   .done(function(res){
     console.log(res);

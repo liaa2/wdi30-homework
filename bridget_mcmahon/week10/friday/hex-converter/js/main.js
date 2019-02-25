@@ -62,7 +62,7 @@ const colorToHex = (rgbColor) => {
 };
 
 const rgbToHex = (color) => {
-  const pattern = /rgb\(([0-9]{1,3}), ([0-9]{1,3}), ([0-9]{1,3})\)/
+  const pattern = /rgb\(([0-9]{1,3}),\s?([0-9]{1,3}),\s?([0-9]{1,3})\)/
   const hexSplit = color.split(pattern).filter(n => n);
 
   const r = colorToHex(hexSplit[0]);
@@ -73,28 +73,6 @@ const rgbToHex = (color) => {
 };
 
 // ------------ RGB TO HSL ------------
-const rgbToHSL = (color) => {
-  let regex = /rgb\(([0-9]{1,3}), ([0-9]{1,3}), ([0-9]{1,3})\)/
-  let [, r, g, b] = color.match(regex);
-
-  r = (r / 255).toFixed(2);
-  g = (g / 255).toFixed(2);
-  b = (b / 255).toFixed(2);
-
-  let min = Math.min(r, g, b);
-  let max = Math.max(r, g, b);
-
-  let l = ((min + max) / 2);
-  const s = calculateSat(min, max, l);
-  let h = 0;
-  if (s !== 0) {
-    h = calculateHue(min, max, r, g, b);
-  }
-
-  l = Math.round(l * 100);
-
-  return `hsl(${h}, ${s}%, ${l}%)`;
-};
 
 //  SATURATION CALCULATION
 const calculateSat = (min, max, l) => {
@@ -129,8 +107,33 @@ const calculateHue = (min, max, r, g, b) => {
   return h;
 };
 
+// RGB TO HSL FUNCTION
+const rgbToHSL = (color) => {
+  let regex = /rgb\(([0-9]{1,3}),\s?([0-9]{1,3}),\s?([0-9]{1,3})\)/
+  let [, r, g, b] = color.match(regex);
+
+  r = (r / 255).toFixed(2);
+  g = (g / 255).toFixed(2);
+  b = (b / 255).toFixed(2);
+
+  let min = Math.min(r, g, b);
+  let max = Math.max(r, g, b);
+
+  let l = ((min + max) / 2);
+  const s = calculateSat(min, max, l);
+  let h = 0;
+  if (s !== 0) {
+    h = calculateHue(min, max, r, g, b);
+  }
+
+  l = Math.round(l * 100);
+
+  return `hsl(${h}, ${s}%, ${l}%)`;
+};
+
 
 // ------------ HSL TO RGB ------------
+
 // CHECK BETWEEN 0 and 1
 const checkZeroToOne = (num) => {
   if (num < 0) {
@@ -158,11 +161,12 @@ const findFormula = (temp1, temp2, tempColor) => {
 };
 
 const hslToRGB = (color) => {
-  let regex = /hsl\(([0-9]{1,3}), ([0-9]{1,3})%, ([0-9]{1,3})%\)/
+  let regex = /hsl\(([0-9]{1,3}),\s?([0-9]{1,3})%,\s?([0-9]{1,3})%\)/
   let [, h, s, l] = color.match(regex);
   s /= 100;
   l /= 100;
   let r, g, b;
+  console.log(h, s, l);
 
   if (s === 0) {
     r = g = b = (l * 255);
@@ -176,16 +180,15 @@ const hslToRGB = (color) => {
     }
 
     temp2 = 2 * l - temp1;
-    console.log('temps', temp1, temp2);
 
     h = h / 360;
 
     let tempR = h + 0.333;
-    checkZeroToOne(tempR);
+    tempR = checkZeroToOne(tempR);
     let tempG = h;
-    checkZeroToOne(tempG);
+    tempG = checkZeroToOne(tempG);
     let tempB = h - 0.333;
-    checkZeroToOne(tempB);
+    tempB = checkZeroToOne(tempB);
 
     r = findFormula(temp1, temp2, tempR);
     g = findFormula(temp1, temp2, tempG);
@@ -194,3 +197,8 @@ const hslToRGB = (color) => {
 
   return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
 };
+
+// tests
+// #FF4500
+// rgb(123, 104, 238)
+// hsl(50, 100%, 50%)

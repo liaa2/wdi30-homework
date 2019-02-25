@@ -73,7 +73,7 @@ $(document).ready(function(){
 
   // Load our text file over AJAX
   // NOTE: for this to work you will have to run a server on your laptop,
-  // i.e. by typing the command 'python -m SimpleHTTPServer' in this folder ('python -m http.server' for newer versions of python)
+  // i.e. by typing the command 'python -m http.server' (for Python ver. 3) in this folder (or 'python -m SimpleHTTPServer' if you are running Python ver. 2)
   // OR
   // alternatively you could run a node server by simply running 'http-server'
   // If you are thrown an error you may have to download http-server by running npm install -g http-server

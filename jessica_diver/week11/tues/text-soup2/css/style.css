@@ -1,0 +1,20 @@
+body {
+  background-color: black;
+  font-family: monospace;
+}
+
+#words {
+  display: none;
+}
+
+.word {
+  display: none;
+  position: absolute;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  color: white;
+  font-family: monospace;
+}

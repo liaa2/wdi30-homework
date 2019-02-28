@@ -1,3 +1,9 @@
+const controls = {
+  velocityScale: 0.1,
+  gravity: 0.0,
+  lifetime: 0
+};
+
 let particles = [];
 
 function setup(){
@@ -8,6 +14,13 @@ function setup(){
   noStroke();
   // Change the colour space we use to specify colours
   colorMode(HSB, 255);
+
+  // Add a control Panel
+  const gui = new dat.GUI();
+  gui.add(controls, 'velocityScale', -1, 1);
+  gui.add(controls, 'gravity', -1, 1);
+  gui.add(controls, 'lifetime', -10, 0);
+  gui.closed = true;
 
   // stroke(random(255));
   // fill(0, 0, 255);
@@ -119,12 +132,16 @@ function draw() {
 
   fill(hue, 255, 255)
 
-  if (mouseIsPressed || keyIsDown(SHIFT)) {
+  if (keyIsDown(SHIFT)) {
     // ellipse( x, y, size, size)
 
     particles.push({ x, y, xVel, yVel, hue, size, life: 1.0 })
   }
   updateParticles();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight)
 }
 
 function updateParticles() {
@@ -133,8 +150,10 @@ function updateParticles() {
   for (var i = 0; i < particles.length; i++) {
     const p = particles[i];
 
-    p.x += (p.xVel);
-    p.y += (p.yVel);
+    p.x += (p.xVel * controls.velocityScale);
+    p.y += (p.yVel * controls.velocityScale);
+
+    p.yVel += controls.gravity;
 
     if (p.x >= windowWidth || p.x <= 0) {
       p.xVel *= -1
@@ -144,7 +163,11 @@ function updateParticles() {
       p.yVel *= -1
     }
 
-    p.life += 0.001
+    p.life += (0.001 * controls.lifetime);
+
+    if (p.life > 0) {
+      outputParticles.pop(p);
+    }
 
     fill(p.hue, 255, 255, p.life*255);
     ellipse(p.x, p.y, p.size, p.size)
